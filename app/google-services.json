@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "733360418034",
+    "project_id": "buddybase-efd0e",
+    "storage_bucket": "buddybase-efd0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:733360418034:android:eda37ea0481c04a53b346b",
+        "android_client_info": {
+          "package_name": "com.example.buddybase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "733360418034-13eaudfk51t0h9ic4mqhp5ve5dmjg78g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPMI9L8LkwE9477j7spZe6wA6MFbEHPHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "733360418034-13eaudfk51t0h9ic4mqhp5ve5dmjg78g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
