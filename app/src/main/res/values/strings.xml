@@ -2,4 +2,5 @@
     <string name="app_name">BuddyBase</string>
     <string name="facebook_app_id">273712087780069</string>
     <string name="fb_login_protocol_scheme">fb273712087780069</string>
+    <string name="hello">hello</string>
 </resources>
