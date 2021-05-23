@@ -27,6 +27,9 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_account)
 
+        //manager
+        this.userApp = this.applicationContext as UserApplication
+
 
         FacebookSdk.sdkInitialize(getApplicationContext())
         AppEventsLogger.activateApp(this@CreateAccountActivity)
@@ -37,9 +40,6 @@ class CreateAccountActivity : AppCompatActivity() {
         facebookSignInButton.setReadPermissions("email")
 
 
-        //manager
-
-        this.userApp = this.applicationContext as UserApplication
 
         // Callback registration
         facebookSignInButton.registerCallback(callbackManager, object :
