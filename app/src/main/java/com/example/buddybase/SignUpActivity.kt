@@ -2,7 +2,6 @@ package com.example.buddybase
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.UserManager
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -18,7 +17,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-class CreateAccountActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() {
     var callbackManager: CallbackManager? = null
     lateinit var facebookSignInButton: LoginButton
     var firebaseAuth: FirebaseAuth? = null
@@ -35,7 +34,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
 
         FacebookSdk.sdkInitialize(getApplicationContext())
-        AppEventsLogger.activateApp(this@CreateAccountActivity)
+        AppEventsLogger.activateApp(this@SignUpActivity)
 
         firebaseAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
@@ -125,11 +124,11 @@ class CreateAccountActivity : AppCompatActivity() {
 //                        }
                     }
 
-                    startActivity(Intent(this@CreateAccountActivity, SurveyActivity::class.java))
+                    startActivity(Intent(this@SignUpActivity, SurveyActivity::class.java))
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("CreateAccountActivity", "signInWithCredential:failure", task.getException())
-                    Toast.makeText(this@CreateAccountActivity, "Authentication failed.",
+                    Toast.makeText(this@SignUpActivity, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                 }
             }
