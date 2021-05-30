@@ -14,6 +14,8 @@ import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class CreateAccountActivity : AppCompatActivity() {
@@ -21,6 +23,7 @@ class CreateAccountActivity : AppCompatActivity() {
     lateinit var facebookSignInButton: LoginButton
     var firebaseAuth: FirebaseAuth? = null
     lateinit var userApp: UserApplication
+    lateinit var db: FirebaseFirestore
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,15 +38,14 @@ class CreateAccountActivity : AppCompatActivity() {
         AppEventsLogger.activateApp(this@CreateAccountActivity)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        callbackManager = CallbackManager.Factory.create();
+        db = FirebaseFirestore.getInstance()
+        callbackManager = CallbackManager.Factory.create()
         facebookSignInButton = findViewById<View>(R.id.login_button) as LoginButton
         facebookSignInButton.setReadPermissions("email")
 
 
-
         // Callback registration
-        facebookSignInButton.registerCallback(callbackManager, object :
-                                              FacebookCallback<LoginResult> {
+        facebookSignInButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
 
             override fun onSuccess(loginResult: LoginResult) {
                 // App code
@@ -83,6 +85,23 @@ class CreateAccountActivity : AppCompatActivity() {
                         val manager: com.example.buddybase.manager.UserManager = this.userApp.userManager
                         manager.setEmail(user.email.toString())
                         manager.setFullName(user.displayName.toString())
+                        Log.i("eugene", user.uid)
+
+                        var docRef = db.collection("Users").document(user.uid)
+                        docRef.get()
+                                .addOnSuccessListener { document ->
+                                    if (document.data != null) {
+                                        Log.i("eugene", "create user in firestore: user already exists")
+                                        Log.i("eugene", "data: ${document.data}")
+                                    } else {
+                                        Log.i("eugene", "started the doc creation")
+                                        addNewUserToFirestore(user)
+                                    }
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.i("eugene", "something wrong:", exception)
+                                }
+
 
 //                        for (profile in it.providerData) {
 //                            // Id of the provider (ex: google.com)
@@ -116,7 +135,16 @@ class CreateAccountActivity : AppCompatActivity() {
             }
     }
 
+    private fun addNewUserToFirestore(user: FirebaseUser) {
+        val userDetails = hashMapOf(
+                "FullName" to user.displayName,
+                "Email" to user.email
+        )
 
+        db.collection("Users").document(user.uid).set(userDetails)
+                .addOnSuccessListener { Log.i("eugene", "New User Added to Firestore: DocumentSnapshot successfully written!") }
+                .addOnFailureListener { e -> Log.i("eugene", "New User Error Adding to Firestore: Error writing document", e) }
+    }
 
 
 }
