@@ -29,4 +29,9 @@
     <string name="personality">Pick a fav friend personality</string>
     <string name="calm">Calm</string>
     <string name="energetic">Energetic</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="or">OR</string>
 </resources>
