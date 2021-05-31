@@ -5,3 +5,4 @@
         <solid android:color="@color/blue_buddybase"/>
         <corners android:radius="8dp"/>
 </shape>
+
