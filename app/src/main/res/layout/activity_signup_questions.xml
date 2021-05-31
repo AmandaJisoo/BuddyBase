@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SignUpQuestionsActivity"
-    android:id="@+id/listOfSongs">
+    android:id="@+id/listOfQuestions">
 
     <TextView
         android:id="@+id/question"
@@ -22,13 +22,12 @@
         android:id="@+id/gridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:layout_marginTop="50dp" >
     </GridView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/songContainer"
+        android:id="@+id/btnContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
