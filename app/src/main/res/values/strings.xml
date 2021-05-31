@@ -34,4 +34,6 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account">Create Account</string>
     <string name="or">OR</string>
+    <string name="like">Like</string>
+    <string name="remove">Remove</string>
 </resources>
