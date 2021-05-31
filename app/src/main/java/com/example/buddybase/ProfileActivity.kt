@@ -36,14 +36,16 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater).apply { setContentView(root) }
 
         with(binding) {
-            tvName.text = "${personDataTemp["FullName"]}"
-            tvAnimalPreference.text =
-                "Enjoys the company of ${personDataTemp["Q_Pet"]}"
-            tvMusicPreferences.text = "Likes ${personDataTemp["Q_Music"].toString()}"
-            tvShowPreferences.text = "Would watch ${personDataTemp["Q_Show"]}"
-            tvPersonalityType.text = "Acts ${personDataTemp["Q_Personality"].toString()}"
-            tvFoodPreferences.text = "Feels like eating something ${personDataTemp["Q_Taste"]}"
-            tvAttitude.text = "Looking for a friend who is ${personDataTemp["Q_FriendType"].toString()}"
+            if (personDataTemp != null) {
+                tvName.text = "${personDataTemp["FullName"]}"
+                tvAnimalPreference.text =
+                    "Enjoys the company of ${personDataTemp["Q_Pet"]}"
+                tvMusicPreferences.text = "Likes ${personDataTemp["Q_Music"].toString()}"
+                tvShowPreferences.text = "Would watch ${personDataTemp["Q_Show"]}"
+                tvPersonalityType.text = "Acts ${personDataTemp["Q_Personality"].toString()}"
+                tvFoodPreferences.text = "Feels like eating something ${personDataTemp["Q_Taste"]}"
+                tvAttitude.text = "Looking for a friend who is ${personDataTemp["Q_FriendType"].toString()}"
+            }
         }
     }
 }
