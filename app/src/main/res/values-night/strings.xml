@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BuddyBase</string>
+    <string name="facebook_app_id">273712087780069</string>
+    <string name="fb_login_protocol_scheme">fb273712087780069</string>
+    <string name="hello">hello</string>
+    <string name="petQuestion">Pick a fav pet</string>
+    <string name="doggo">Doggo</string>
+    <string name="cat">Cat</string>
+    <string name="musicQuestion">Pick a fav genre of music</string>
+    <string name="hip_hop">Hip-Hop</string>
+    <string name="rock">Rock</string>
+    <string name="jazz">Jazz</string>
+    <string name="classical">Classical</string>
+    <string name="pop">Pop</string>
+    <string name="k_pop">K-pop</string>
+    <string name="movieQuestion">Pick a fav genre of movie</string>
+    <string name="horror">Horror</string>
+    <string name="romance">Romance</string>
+    <string name="action">Action</string>
+    <string name="documentary">Documentary</string>
+    <string name="comedy">Comedy</string>
+    <string name="personalityQuestion">Pick your personality</string>
+    <string name="veryIntrov">Very Introverted</string>
+    <string name="introverted">introverted</string>
+    <string name="extroverted">extroverted</string>
+    <string name="flavorQuestion">Pick a fav flavor</string>
+    <string name="savory">Savory</string>
+    <string name="sweet">Sweet</string>
+    <string name="personality">Pick a fav friend personality</string>
+    <string name="calm">Calm</string>
+    <string name="energetic">Energetic</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="create_account">Create Account</string>
+    <string name="or">OR</string>
+
+</resources>
