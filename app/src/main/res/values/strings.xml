@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="submit">submit</string>
+    <string name="you_are_all_set_msg">you are all set msg</string>
 </resources>

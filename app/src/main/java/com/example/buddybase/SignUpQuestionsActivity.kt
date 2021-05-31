@@ -1,4 +1,5 @@
 package com.example.buddybase
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -51,6 +52,8 @@ class SignUpQuestionsActivity : AppCompatActivity() {
             } else {
                 //launch new activity -> show finish icon
                 Log.i("over", "all question completed")
+                startActivity(Intent(this@SignUpQuestionsActivity, SignUpConfirmActivity::class.java))
+
             }
 
         }

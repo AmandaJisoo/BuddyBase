@@ -26,7 +26,6 @@ class ColorBaseAdapter : BaseAdapter(){
 
     val choiceOptionIndex = 0
 
-    @SuppressLint("ViewHolder")
     override fun getView(position:Int, convertView: View?, parent: ViewGroup?):View{
 
         // Inflate the custom view
