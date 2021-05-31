@@ -13,23 +13,21 @@
     android:layout_margin="5dp"
     >
 
+<!--  android:background="@drawable/option_btn_toggle"
+-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <TextView
-            android:id="@+id/tv_name"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textStyle="bold" />
 
-<!--        <TextView-->
-<!--            android:layout_width="60dp"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:text="hello-first-Q"-->
-<!--            android:visibility="visible" />-->
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

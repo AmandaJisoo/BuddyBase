@@ -1,8 +1,11 @@
 package com.example.buddybase
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,25 +13,38 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
+
+var currentQuestionIndex: Number = 0
+
 
 class ColorBaseAdapter : BaseAdapter(){
     private val list = colors()
 
+
+//    private val question = questions()
+    private val choices = choicesPerQuestion()
+    private val firstQChoices = firstQChoices()
+    var curQuestion = firstQChoices
+
+    val choiceOptionIndex = 0
+
+    @SuppressLint("ViewHolder")
     override fun getView(position:Int, convertView: View?, parent: ViewGroup?):View{
+
         // Inflate the custom view
         val inflater = parent?.context?.
         getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.activity_first_question,null)
 
         // Get the custom view widgets reference
-        val tv = view.findViewById<TextView>(R.id.tv_name)
+        val tvName = view.findViewById<TextView>(R.id.tvName)
         val card = view.findViewById<CardView>(R.id.card_view)
 
-        // Display color name on text view
-        tv.text = list[position].first
 
-        // Set background color for card view
-        card.setCardBackgroundColor(list[position].second)
+        // Display color name on text view
+        tvName.text = curQuestion[position]
+        Log.i("position", position.toString())
 
         // Set a click listener for card view
         card.setOnClickListener{
@@ -39,31 +55,26 @@ class ColorBaseAdapter : BaseAdapter(){
             // Get the activity reference from parent
             val activity  = parent.context as Activity
 
-            // Get the activity root view
-            val viewGroup = activity.findViewById<ViewGroup>(android.R.id.content)
-                .getChildAt(0)
 
-            // Change the root layout background color
-            viewGroup.setBackgroundColor(list[position].second)
+
         }
-
         // Finally, return the view
         return view
     }
 
 
 
-    /*
-        **** reference source developer.android.com ***
+//
+//Doesn't work
+//            Log.i("color1", card.background.toString())
+//            if (!card.background.equals(Color.parseColor("#40fd779"))) {
+//                card.setBackgroundColor(Color.parseColor("#3B5998"))
+//                Log.i("inside", card.background.toString())
+//            } else {
+//                card.setBackgroundColor(Color.parseColor("#FFFFFF"))
+//            }
 
-        Object getItem (int position)
-            Get the data item associated with the specified position in the data set.
 
-        Parameters
-            position int : Position of the item whose data we want within the adapter's data set.
-        Returns
-            Object : The data at the specified position.
-    */
     override fun getItem(position: Int): Any? {
         return list[position]
     }
@@ -76,10 +87,19 @@ class ColorBaseAdapter : BaseAdapter(){
 
     // Count the items
     override fun getCount(): Int {
-        return list.size
+        return curQuestion.size
     }
 
 
+    fun updateQuestionOptions(curIndex: Number) {
+        when(curIndex) {
+            0 -> curQuestion = firstQChoices()
+            1 -> curQuestion = secondQChoices()
+            2 -> curQuestion = thirdQChoices()
+            3 -> curQuestion = fourthQChoices()
+        }
+
+    }
 
 
     // Custom method to generate list of color name value pair
@@ -102,5 +122,45 @@ class ColorBaseAdapter : BaseAdapter(){
             Pair("MEDIUMVIOLETRED",Color.parseColor("#C71585")),
             Pair("PALEVIOLETRED",Color.parseColor("#DB7093"))
         )
+    }
+
+    private fun questions():List<String>{
+        return listOf(
+            "Pick a fav pet",
+            "Pick a fav genre of music",
+            "Pick a fav genre of movie",
+            "Pick your personality",
+            "Pick a fav friend personality"
+        )
+    }
+
+    private fun firstQChoices():List<String> {
+        return listOf("Doggo", "Cat")
+    }
+
+    private fun secondQChoices():List<String> {
+        return listOf(
+            "Hip-Hop", "Rock", "Jazz", "Classical", "Pop", "K-pop")
+    }
+
+    private fun thirdQChoices():List<String> {
+        return listOf("Horror", "Romance", "Action", "Documentary", "Comedy")
+    }
+
+    private fun fourthQChoices():List<String> {
+        return listOf("Very Introverted", "introverted", "extroverted")
+    }
+
+
+
+    private fun choicesPerQuestion():Map<Number, List<String>>{
+        val optionsList: Map<Number, List<String>> = mutableMapOf()
+        optionsList.plus(0 to listOf("Doggo", "Cat"))
+        optionsList.plus(1 to listOf("Hip-Hop", "Rock", "Jazz", "Classical", "Pop", "K-pop"))
+        optionsList.plus(2 to listOf("Horror", "Romance", "Action", "Documentary", "Comedy"))
+        optionsList.plus(3 to listOf("Very Introverted", "introverted", "extroverted"))
+        optionsList.plus(4 to listOf("Savory", "Sweet"))
+        optionsList.plus(5 to listOf("Calm", "Energetic", "Athletic", "Outgoing", "Reserve"))
+        return optionsList
     }
 }
