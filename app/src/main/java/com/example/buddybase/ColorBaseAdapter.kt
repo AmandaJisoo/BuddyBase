@@ -32,7 +32,7 @@ class ColorBaseAdapter : BaseAdapter(){
         // Inflate the custom view
         val inflater = parent?.context?.
         getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.activity_first_question,null)
+        val view = inflater.inflate(R.layout.questions,null)
 
         // Get the custom view widgets reference
         val tvName = view.findViewById<TextView>(R.id.tvName)

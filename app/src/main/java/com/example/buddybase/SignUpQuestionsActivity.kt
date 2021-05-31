@@ -1,8 +1,8 @@
 package com.example.buddybase
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.GridView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buddybase.databinding.ActivitySignupQuestionsBinding
 
@@ -13,12 +13,13 @@ class SignUpQuestionsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupQuestionsBinding
     private lateinit var questions: List<String>
+    private lateinit var adapter: ColorBaseAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         this.binding = ActivitySignupQuestionsBinding.inflate(layoutInflater).apply { setContentView(root) }
-        val adapter = ColorBaseAdapter()
+        adapter = ColorBaseAdapter()
         questions = questions()
         // Set the grid view adapter
         binding.gridView.adapter = adapter
@@ -32,13 +33,17 @@ class SignUpQuestionsActivity : AppCompatActivity() {
 
         //initial first question
         binding.question.text = questions[curQuestionIndex]
+        updateImage()
 
 
 
         binding.questionSubmitBtn.setOnClickListener {
             if (adapter.getCurrentQuestionIndex() < TOTAL_NUM_QUESTIONS) {
-                adapter.moveToNextQuestion()
+                binding.processBar.setVisibility(View.GONE);
                 adapter.updateQuestionOptions()
+                adapter.moveToNextQuestion()
+                updateImage()
+                binding.processBar.setVisibility(View.VISIBLE);
                 Log.i("currentQuestionIndex", adapter.getCurrentQuestionIndex().toString())
 
                 curQuestionIndex = adapter.getCurrentQuestionIndex()
@@ -61,7 +66,21 @@ class SignUpQuestionsActivity : AppCompatActivity() {
         )
     }
 
+    //TODO: correctly get the file. It looks too messed stuff
+    private fun updateImage(){
+        Log.i("updateImage", adapter.getCurrentQuestionIndex().toString())
+        when(adapter.getCurrentQuestionIndex()) {
+            0 -> binding.processBar.setBackgroundResource(R.drawable.process2)
+            1 -> binding.processBar.setBackgroundResource(R.drawable.process3)
+            2 -> binding.processBar.setBackgroundResource(R.drawable.process4)
+            3 ->  binding.processBar.setBackgroundResource(R.drawable.process6)
+
+        }
+    }
+
     companion object {
         private const val TOTAL_NUM_QUESTIONS = 4
     }
+
+
 }
