@@ -27,7 +27,7 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_account)
+        setContentView(R.layout.activity_sign_up)
 
         //manager
         this.userApp = this.applicationContext as UserApplication
@@ -39,7 +39,7 @@ class SignUpActivity : AppCompatActivity() {
         firebaseAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
         callbackManager = CallbackManager.Factory.create()
-        facebookSignInButton = findViewById<View>(R.id.login_button) as LoginButton
+        facebookSignInButton = findViewById<View>(R.id.btnFacebookSignUp) as LoginButton
         facebookSignInButton.setReadPermissions("email")
 
 
