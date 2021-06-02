@@ -63,4 +63,8 @@ dependencies {
     implementation 'com.facebook.android:facebook-login:4.30.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.3'
 
+
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.1.1'
+
 }

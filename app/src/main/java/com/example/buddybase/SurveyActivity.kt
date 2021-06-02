@@ -5,10 +5,12 @@ import android.os.UserManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.example.buddybase.databinding.ActivitySurveyBinding
+import com.google.firebase.firestore.FirebaseFirestore
 
 class SurveyActivity: AppCompatActivity() {
     private lateinit var binding:ActivitySurveyBinding
     lateinit var userApp: UserApplication
+    lateinit var manager: com.example.buddybase.manager.UserManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,14 +20,11 @@ class SurveyActivity: AppCompatActivity() {
         this.binding = ActivitySurveyBinding.inflate(layoutInflater).apply { setContentView(root) }
         this.userApp =  this.applicationContext as UserApplication
 
-        val manager: com.example.buddybase.manager.UserManager = this.userApp.userManager
+        manager = this.userApp.userManager
 
         with (binding) {
             email.text = manager.email
             fullName.text = manager.fullName
         }
-
-
-
     }
 }
