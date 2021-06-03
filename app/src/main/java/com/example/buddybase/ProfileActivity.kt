@@ -21,25 +21,25 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
 
-        lifecycleScope.launch {
-            runCatching {
-                val firestore = FirebaseFirestore.getInstance()
-                val docRef = firestore.collection("Users").document(TEST_DATA)
-                docRef.get()
-                    .addOnSuccessListener { document ->
-                        if (document != null) {
-                            personDataTemp = document.data as Map<String, Any>
-                        } else {
-                            failMsg = "Doc doesn't exist"
-                        }
-                    }
-                    .addOnFailureListener{ exception ->
-                        Log.d("uhOh", "get failed with", exception)
-                    }
-            }.onFailure {
-                failMsg = "Failed"
-            }
-        }
+//        lifecycleScope.launch {
+//            runCatching {
+//                val firestore = FirebaseFirestore.getInstance()
+//                val docRef = firestore.collection("Users").document(TEST_DATA)
+//                docRef.get()
+//                    .addOnSuccessListener { document ->
+//                        if (document != null) {
+//                            personDataTemp = document.data as Map<String, Any>
+//                        } else {
+//                            failMsg = "Doc doesn't exist"
+//                        }
+//                    }
+//                    .addOnFailureListener{ exception ->
+//                        Log.d("uhOh", "get failed with", exception)
+//                    }
+//            }.onFailure {
+//                failMsg = "Failed"
+//            }
+//        }
 
         binding = ActivityProfileBinding.inflate(layoutInflater).apply { setContentView(root) }
 
@@ -82,7 +82,7 @@ class ProfileActivity : AppCompatActivity() {
                                 tvFoodPreferences.text =
                                     "Feels like eating something ${personDataTemp["Q_Taste"]}"
                                 tvAttitude.text =
-                                    "Looking for a friend who is ${personDataTemp["Q_FriendType"].toString()}"
+                                    "Looking for a friend who is ${personDataTemp["Q_FriendType"].toString().substring(1, personDataTemp["Q_FriendType"].toString().length - 1)}"
                             }
                         } else {
                             failMsg = "Doc doesn't exist"
