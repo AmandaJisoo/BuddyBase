@@ -11,9 +11,9 @@ data class UserInfo (
     val Q_FriendType: List<String>,
     val Q_Music: List<String>,
     val Q_Personality: List<String>,
-    val Q_Pet: List<String>,
-    val Q_Show: List<String>,
-    val Q_Taste: List<String>
+    val Q_Pet: String,
+    val Q_Show: String,
+    val Q_Taste: String
 )
 
 //Raiki Lim={

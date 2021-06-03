@@ -1,4 +1,4 @@
-package com.example.buddybase
+package com.example.buddybase.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.navigation.fragment.findNavController
+import com.example.buddybase.UserApplication
 import com.example.buddybase.adapter.RecommendedFriendsAdapter
-import com.example.buddybase.databinding.ActivityRecommendedFriendsBinding
 import com.example.buddybase.databinding.FragmentRecommendedFriendsBinding
 import com.example.buddybase.manager.UserManager
 import com.google.firebase.firestore.DocumentReference

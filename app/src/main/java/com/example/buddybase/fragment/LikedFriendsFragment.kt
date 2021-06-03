@@ -1,4 +1,4 @@
-package com.example.buddybase
+package com.example.buddybase.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

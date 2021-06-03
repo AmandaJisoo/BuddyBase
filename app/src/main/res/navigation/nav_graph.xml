@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/recommendedFriendsFragment"
-        android:name="com.example.buddybase.RecommendedFriendsFragment"
+        android:name="com.example.buddybase.fragment.RecommendedFriendsFragment"
         android:label="fragment_recommended_friends"
         tools:layout="@layout/fragment_recommended_friends" />
     <fragment
         android:id="@+id/likedFriendsFragment"
-        android:name="com.example.buddybase.LikedFriendsFragment"
+        android:name="com.example.buddybase.fragment.LikedFriendsFragment"
         android:label="fragment_liked_friends"
         tools:layout="@layout/fragment_liked_friends" />
     <action
