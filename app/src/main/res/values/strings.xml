@@ -37,4 +37,5 @@
     <string name="like">Like</string>
     <string name="remove">Remove</string>
     <string name="sign_in">Sign In</string>
+    <string name="recommended_friends_friend_type_format">"%s is looking for %s friends."</string>
 </resources>
