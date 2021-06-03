@@ -8,9 +8,9 @@
     <application
         android:name=".UserApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_buddybase_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_buddybase_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BuddyBase">
         <activity android:name=".ProfileActivity">
@@ -19,6 +19,13 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        <activity android:name=".RecommendedFriendsActivity"
+            android:label="Recommended Friends">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <meta-data
@@ -41,7 +48,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="@string/fb_login_protocol_scheme" />
+                <data android:scheme="@string/fb_login_protocol_scheme"
+                    tools:ignore="ManifestResource" />
             </intent-filter>
         </activity>
 <!--        <activity android:name=".SignUpActivity">-->
@@ -52,6 +60,7 @@
 <!--            </intent-filter>-->
 <!--        </activity>-->
 <!--        <activity android:name=".SurveyActivity" />-->
+
     </application>
 
 </manifest>
