@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:src="@drawable/ic_buddybase"
+        android:layout_marginTop="50dp"
         app:layout_constraintDimensionRatio="2"
         app:layout_constraintBottom_toTopOf="@+id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +44,6 @@
         android:layout_marginBottom="20dp"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:maxLength="8"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@id/etConfirmPassword"
         app:layout_constraintEnd_toEndOf="@id/etEmail"
@@ -60,7 +60,6 @@
         android:layout_marginBottom="20dp"
         android:hint="@string/confirm_password"
         android:inputType="textPassword"
-        android:maxLength="8"
         android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="@id/etPassword"
@@ -98,16 +97,6 @@
         app:layout_constraintTop_toBottomOf="@+id/btnCreateAccount"
         android:gravity="center_horizontal" />
 
-    <Button
-        android:id="@+id/btnSignIn2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:text="@string/sign_in"
-        app:layout_constraintEnd_toEndOf="@+id/btnCreateAccount"
-        app:layout_constraintStart_toStartOf="@+id/btnCreateAccount"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btnFacebookSignUp"
         android:layout_width="match_parent"
@@ -116,7 +105,34 @@
         android:layout_margin="20dp"
         app:layout_constraintStart_toStartOf="@+id/btnCreateAccount"
         app:layout_constraintEnd_toEndOf="@+id/btnCreateAccount"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignIn2"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
         android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/tvLoginInstead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal"
+        android:text="@string/tvLoginInstead"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/btnCreateAccount"
+        app:layout_constraintHorizontal_bias="0.372"
+        app:layout_constraintStart_toStartOf="@+id/btnCreateAccount"
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebookSignUp" />
+
+    <TextView
+        android:id="@+id/tvSwitchToLogIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="5dp"
+        android:text="Log in"
+        android:textColor="@color/blue_buddybase"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/tvLoginInstead"
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebookSignUp"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
