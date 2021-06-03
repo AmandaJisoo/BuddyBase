@@ -25,6 +25,7 @@ class RecommendedFriendsFragment : Fragment() {
     ): View? {
         val binding = FragmentRecommendedFriendsBinding.inflate(inflater)
         activity?.title = "Recommended Friends"
+
         userApp = activity?.applicationContext as UserApplication
         manager = this.userApp.userManager
 

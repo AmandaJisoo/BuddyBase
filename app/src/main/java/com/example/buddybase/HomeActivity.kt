@@ -18,6 +18,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater).apply { setContentView(root) }
         with(binding) {
+            // disable auto color tint
+            navBarView.itemIconTintList = null
+
             navBarView.setOnNavigationItemSelectedListener {
                 when(it.itemId) {
                     R.id.nav_bar_home -> navController.navigate(NavGraphHomeDirections.actionGlobalRecommendedFriendsFragment())

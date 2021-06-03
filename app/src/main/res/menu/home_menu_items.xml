@@ -3,25 +3,25 @@
 
     <item
         android:id="@+id/nav_bar_home"
-        android:icon="@drawable/ic_tab_home"
-        android:title="Browse"
+        android:icon="@drawable/ic_home_selector"
+        android:title="BuddyBase"
         />
 
     <item
         android:id="@+id/nav_bar_liked"
-        android:icon="@drawable/ic_tab_liked_friends"
+        android:icon="@drawable/ic_liked_selector"
         android:title="Liked"
         />
 
     <item
         android:id="@+id/nav_bar_notification"
-        android:icon="@drawable/ic_tab_notification"
+        android:icon="@drawable/ic_notification_selector"
         android:title="Notification"
         />
 
     <item
         android:id="@+id/nav_bar_account"
-        android:icon="@drawable/ic_tab_account"
+        android:icon="@drawable/ic_account_selector"
         android:title="Me"
         />
 
