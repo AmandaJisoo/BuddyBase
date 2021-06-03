@@ -15,11 +15,11 @@
         android:theme="@style/Theme.BuddyBase">
         <activity android:name=".RecommendedFriendsActivity"
             android:label="Recommended Friends">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
         </activity>
 
         <meta-data
@@ -46,13 +46,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".SignUpActivity">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".SurveyActivity" />
+        <activity android:name=".LogInActivity"/>
     </application>
 
 </manifest>

@@ -8,23 +8,21 @@ import com.example.buddybase.databinding.ActivitySurveyBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
 class SurveyActivity: AppCompatActivity() {
-    private lateinit var binding:ActivitySurveyBinding
-    lateinit var userApp: UserApplication
-    lateinit var manager: com.example.buddybase.manager.UserManager
+    private lateinit var binding: ActivitySurveyBinding
+    private val userApp: UserApplication by lazy { application as UserApplication }
+    private lateinit var manager: com.example.buddybase.manager.UserManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_survey);
         Log.i("SurveyActivity", "hello works")
 
-        this.binding = ActivitySurveyBinding.inflate(layoutInflater).apply { setContentView(root) }
-        this.userApp =  this.applicationContext as UserApplication
-
-        manager = this.userApp.userManager
+        binding = ActivitySurveyBinding.inflate(layoutInflater).apply { setContentView(root) }
+        this.manager = userApp.userManager
 
         with (binding) {
             email.text = manager.email
             fullName.text = manager.fullName
         }
+//        Log.i("test", "${manager.matchedUids}")
     }
 }

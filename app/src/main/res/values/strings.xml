@@ -32,9 +32,11 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
-    <string name="create_account">Create Account</string>
+    <string name="create_account">Sign Up</string>
     <string name="or">OR</string>
     <string name="like">Like</string>
     <string name="remove">Remove</string>
-    <string name="sign_in">Sign In</string>
+    <string name="sign_in">Log In</string>
+    <string name="tvLoginInstead">Already have an account?</string>
+    <string name="tvSignUpInstead">Don\'t have an account?</string>
 </resources>

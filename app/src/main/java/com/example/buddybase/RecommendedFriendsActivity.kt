@@ -37,7 +37,7 @@ class RecommendedFriendsActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 //        var uid = manager.uid
 //        docRef = uid?.let { db.collection("Users").document(it) }!!
-        
+
         //TODO: for now document("aBhsZO73GMe1a09xrMUemyZJB2q1") is hardcoded because this activity isn't linked to the signup/login flow
         docRef = db.collection("Users").document("aBhsZO73GMe1a09xrMUemyZJB2q1")
         docRef.get()
