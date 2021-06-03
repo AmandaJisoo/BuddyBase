@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">BuddyBase</string>
     <string name="facebook_app_id">273712087780069</string>
@@ -35,8 +34,4 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="create_account">Create Account</string>
     <string name="or">OR</string>
-    <string name="like">Like</string>
-    <string name="remove">Remove</string>
-    <string name="submit">submit</string>
-    <string name="you_are_all_set_msg">you are all set msg</string>
 </resources>

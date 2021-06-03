@@ -3,6 +3,7 @@ package com.example.buddybase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+
 import androidx.lifecycle.lifecycleScope
 import com.example.buddybase.databinding.ActivityProfileBinding
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,7 +20,6 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
 //        lifecycleScope.launch {
 //            runCatching {
