@@ -6,49 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".RecommendedFriendsActivity"
     >
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        >-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/ibHome"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:src="@drawable/ic_tab_home"-->
-<!--            android:background="@color/white"-->
-<!--            android:layout_weight="1"-->
-<!--            />-->
-<!--        <ImageButton-->
-<!--            android:id="@+id/ibLiked"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:src="@drawable/ic_tab_liked_friends"-->
-<!--            android:background="@color/white"-->
-<!--            android:layout_weight="1"-->
-<!--            />-->
-<!--        <ImageButton-->
-<!--            android:id="@+id/ibNotification"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:src="@drawable/ic_tab_notification"-->
-<!--            android:background="@color/white"-->
-<!--            android:layout_weight="1"-->
-<!--            />-->
-
-<!--        <ImageButton-->
-<!--            android:id="@+id/ibAccount"-->
-<!--            android:layout_height="60dp"-->
-<!--            android:layout_width="0dp"-->
-<!--            android:src="@drawable/ic_tab_account"-->
-<!--            android:background="@color/white"-->
-<!--            android:layout_weight="1"-->
-<!--            />-->
-
-<!--    </LinearLayout>-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecommendedFriends"
         android:layout_width="0dp"

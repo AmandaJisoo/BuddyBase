@@ -47,21 +47,39 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
             >
-            <androidx.appcompat.widget.AppCompatButton
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:id="@+id/btnLike"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="35dp"-->
+<!--                android:padding="8dp"-->
+<!--                android:text="@string/like"-->
+<!--                android:textSize="12sp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:background="@drawable/btn_buddybase_default"-->
+<!--                android:textAllCaps="false"-->
+<!--                android:drawableLeft="@drawable/ic_thumb_selector"-->
+<!--                android:drawableStart="@drawable/ic_thumb_selector"-->
+<!--                android:gravity="center_horizontal|center_vertical"-->
+<!--                android:layout_marginRight="12dp"-->
+<!--                android:layout_marginEnd="12dp" />-->
+            <androidx.appcompat.widget.AppCompatToggleButton
                 android:id="@+id/btnLike"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:padding="8dp"
                 android:text="@string/like"
                 android:textSize="12sp"
-                android:textColor="@color/white"
-                android:background="@drawable/btn_buddybase_default"
+                android:textColor="@color/btn_like_text_color_selector"
+                android:background="@drawable/btn_like_selector"
                 android:textAllCaps="false"
-                android:drawableLeft="@drawable/ic_thumb"
-                android:drawableStart="@drawable/ic_thumb"
+                android:drawableLeft="@drawable/ic_thumb_selector"
+                android:drawableStart="@drawable/ic_thumb_selector"
                 android:gravity="center_horizontal|center_vertical"
                 android:layout_marginRight="12dp"
-                android:layout_marginEnd="12dp" />
+                android:layout_marginEnd="12dp"
+                android:textOff="@string/like"
+                android:textOn="@string/liked"
+                />
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnRemove"
                 android:layout_width="wrap_content"

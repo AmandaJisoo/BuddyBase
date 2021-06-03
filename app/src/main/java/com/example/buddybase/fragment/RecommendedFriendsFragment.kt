@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import com.example.buddybase.UserApplication
 import com.example.buddybase.adapter.RecommendedFriendsAdapter
 import com.example.buddybase.databinding.FragmentRecommendedFriendsBinding
+import com.example.buddybase.manager.FriendManager
 import com.example.buddybase.manager.UserManager
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,12 +20,16 @@ class RecommendedFriendsFragment : Fragment() {
     lateinit var userApp: UserApplication
     lateinit var docRef: DocumentReference
 
+    private lateinit var friendManager: FriendManager
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentRecommendedFriendsBinding.inflate(inflater)
         activity?.title = "Recommended Friends"
 
         userApp = activity?.applicationContext as UserApplication
+        this.friendManager = userApp.friendManager
+
         manager = this.userApp.userManager
 
         db = FirebaseFirestore.getInstance()
@@ -46,6 +51,8 @@ class RecommendedFriendsFragment : Fragment() {
                 Log.i("forLeo", "something wrong:", exception)
             }
 
+        // handle button clicks
+
         return binding.root
     }
 
@@ -63,6 +70,14 @@ class RecommendedFriendsFragment : Fragment() {
                             Log.i("forLeo", "$mapOfMatches")
                             val matches = mapOfMatches as Map<String, Any>
                             val adapter = RecommendedFriendsAdapter(matches)
+                            adapter.onLikeClickListener = { friend ->
+//                                tvSongInfo.text = root.context.getString(R.string.song_info_format, song.title, song.artist)
+//                                clSongInfo.isInvisible = false
+//                                currentlyPlaying = song
+//                                musicManager.onSongSelected(song)
+                                friendManager.onLikeClick(friend)
+
+                            }
                             binding.rvRecommendedFriends.adapter = adapter
                         }
                     } else {

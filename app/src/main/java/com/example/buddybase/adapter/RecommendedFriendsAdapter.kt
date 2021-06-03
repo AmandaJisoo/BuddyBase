@@ -13,6 +13,8 @@ import org.json.JSONObject
 class RecommendedFriendsAdapter(private val listOfFriends: Map<String, Any>): RecyclerView.Adapter<RecommendedFriendsAdapter.FriendsViewHolder>() {
 
     private var matchedFriends: MutableList<UserInfo> = mutableListOf()
+    // new
+    var onLikeClickListener: (person: UserInfo) -> Unit = {_ ->}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendsViewHolder {
         val binding = ItemRecommendedFriendBinding.inflate(LayoutInflater.from(parent.context))
@@ -39,7 +41,7 @@ class RecommendedFriendsAdapter(private val listOfFriends: Map<String, Any>): Re
             // TODO: Parse ImageProfilePic as readable URI string
 
             btnLike.setOnClickListener{
-
+                onLikeClickListener(friend)
             }
         }
     }
