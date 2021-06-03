@@ -25,6 +25,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/home_menu_items"
+        tools:layout_editor_absoluteX="0dp"
+        app:labelVisibilityMode="labeled"
         />
 
 
