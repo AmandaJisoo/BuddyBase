@@ -15,10 +15,21 @@
         android:name="com.example.buddybase.fragment.LikedFriendsFragment"
         android:label="fragment_liked_friends"
         tools:layout="@layout/fragment_liked_friends" />
+
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.buddybase.fragment.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
     <action
         android:id="@+id/action_global_recommendedFriendsFragment"
         app:destination="@id/recommendedFriendsFragment" />
     <action
         android:id="@+id/action_global_likedFriendsFragment"
         app:destination="@id/likedFriendsFragment" />
+
+    <action
+        android:id="@+id/action_global_notificationsFragment"
+        app:destination="@id/notificationsFragment" />
 </navigation>

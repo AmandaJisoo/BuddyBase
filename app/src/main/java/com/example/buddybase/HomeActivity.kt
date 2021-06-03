@@ -25,9 +25,10 @@ class HomeActivity : AppCompatActivity() {
                 when(it.itemId) {
                     R.id.nav_bar_home -> navController.navigate(NavGraphHomeDirections.actionGlobalRecommendedFriendsFragment())
                     R.id.nav_bar_liked -> navController.navigate(NavGraphHomeDirections.actionGlobalLikedFriendsFragment())
-                    // TODO: add notification and account page
+                    // TODO: add account page
                     R.id.nav_bar_account -> Toast.makeText(this@HomeActivity, "Not yet implemented!", Toast.LENGTH_SHORT).show()
-                    R.id.nav_bar_notification -> Toast.makeText(this@HomeActivity, "Not yet implemented!", Toast.LENGTH_SHORT).show()
+                    R.id.nav_bar_notification -> navController.navigate(NavGraphHomeDirections.actionGlobalNotificationsFragment())
+
                 }
                 true
             }
