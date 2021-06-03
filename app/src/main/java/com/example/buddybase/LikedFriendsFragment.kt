@@ -12,9 +12,9 @@ class LikedFriendsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentLikedFriendsBinding.inflate(inflater)
-
+        activity?.title = "Liked Friends"
         with(binding){
-
+            // TODO: fill liked friends
         }
         return binding.root
     }
