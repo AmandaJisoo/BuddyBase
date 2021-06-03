@@ -23,7 +23,7 @@ class RecommendedFriendsActivity : AppCompatActivity() {
 
         val binding: ActivityRecommendedFriendsBinding = ActivityRecommendedFriendsBinding.inflate(layoutInflater).apply { setContentView(root) }
 
-        val friends = listOf("Eric", "Chee", "Justin", "Bieber", "Lady", "GAGA", "Captain", "America", "League", "Of", "Legends")
+//        val friends = listOf("Eric", "Chee", "Justin", "Bieber", "Lady", "GAGA", "Captain", "America", "League", "Of", "Legends")
 
 //        with(binding) {
 //            val adapter = RecommendedFriendsAdapter(friends)

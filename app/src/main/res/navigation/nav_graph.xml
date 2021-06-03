@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home"
+    app:startDestination="@id/recommendedFriendsFragment">
+
+    <fragment
+        android:id="@+id/recommendedFriendsFragment"
+        android:name="com.example.buddybase.RecommendedFriendsFragment"
+        android:label="fragment_recommended_friends"
+        tools:layout="@layout/fragment_recommended_friends" />
+    <fragment
+        android:id="@+id/likedFriendsFragment"
+        android:name="com.example.buddybase.LikedFriendsFragment"
+        android:label="fragment_liked_friends"
+        tools:layout="@layout/fragment_liked_friends" />
+    <action
+        android:id="@+id/action_global_recommendedFriendsFragment"
+        app:destination="@id/recommendedFriendsFragment" />
+    <action
+        android:id="@+id/action_global_likedFriendsFragment"
+        app:destination="@id/likedFriendsFragment" />
+</navigation>
