@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/ivOtherProfilePic"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/iv_avatar_placeholder"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:gravity="center_vertical"
+        >
+        <TextView
+            android:id="@+id/tvNotificationAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Someone Name just added you on Facebook"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/tvNotificationDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Visit his Facebook Profile Page"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/black"
+            />
+    </LinearLayout>
+
+</LinearLayout>
