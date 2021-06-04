@@ -14,7 +14,6 @@ class SurveyActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("SurveyActivity", "hello works")
 
         binding = ActivitySurveyBinding.inflate(layoutInflater).apply { setContentView(root) }
         this.manager = userApp.userManager
