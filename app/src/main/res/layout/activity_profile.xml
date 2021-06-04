@@ -7,25 +7,43 @@
     tools:context=".ProfileActivity"
     android:layout_margin="30dp">
 
-    <ImageView
-        android:id="@+id/ivProfPic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/default_prof_pic"
+    <androidx.cardview.widget.CardView
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="70dp" />
+        android:id="@+id/ivProfPic"
+        android:layout_width="155dp"
+        android:layout_height="155dp"
+        app:cardCornerRadius="250dp"
+        app:cardBackgroundColor="@color/blue_buddybase"
+        android:layout_margin="70dp">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/profile_circle"
-        app:layout_constraintTop_toTopOf="@+id/ivProfPic"
-        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"
-        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"
-        app:layout_constraintRight_toRightOf="@id/ivProfPic"
-        />
+        <androidx.cardview.widget.CardView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:cardCornerRadius="250dp"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:id="@+id/ivVariableProfPic"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/default_prof_pic"
+                android:scaleType="centerCrop"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+<!--    <ImageView-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:src="@drawable/profile_circle"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/ivProfPic"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"-->
+<!--        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"-->
+<!--        app:layout_constraintRight_toRightOf="@id/ivProfPic"-->
+<!--        />-->
 
     <TextView
         android:id="@+id/tvName"
@@ -36,27 +54,19 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:textSize="20sp"
-        />
-
-    <TextView
-        android:id="@+id/tvTagline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Default Username"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         />
 
     <View
         android:id="@+id/vSeparator"
-        app:layout_constraintTop_toBottomOf="@+id/tvTagline"
+        app:layout_constraintTop_toBottomOf="@+id/tvName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:background="#e5e5e5"
         android:layout_width="match_parent"
-        android:padding="50dp"
+        android:layout_marginTop="20dp"
         android:layout_height="0.5dp"
         />
 
@@ -67,16 +77,33 @@
         android:text="About"
         app:layout_constraintTop_toBottomOf="@+id/vSeparator"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         />
+
 
     <TextView
         android:id="@+id/tvAnimalPreference"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvAbout"
-        android:text="Enjoys the company of Cats"
+        android:text="Enjoys the company of "
         android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/tvVariableAnimal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tvAnimalPreference"
+        app:layout_constraintTop_toTopOf="@+id/tvAnimalPreference"
+        app:layout_constraintBottom_toBottomOf="@id/tvAnimalPreference"
+        android:text="test"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         />
 
     <TextView
@@ -84,9 +111,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvAnimalPreference"
-        android:text="Likes Classical, K-Pop"
+        android:text="Likes "
         android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/tvVariableMusic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tvMusicPreferences"
+        app:layout_constraintTop_toTopOf="@+id/tvMusicPreferences"
+        app:layout_constraintBottom_toBottomOf="@id/tvMusicPreferences"
+        android:text="test"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         />
 
     <TextView
@@ -94,9 +134,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvMusicPreferences"
-        android:text="Would watch Documentaries"
+        android:text="Would watch "
         android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/tvVariableShow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tvShowPreferences"
+        app:layout_constraintTop_toTopOf="@+id/tvShowPreferences"
+        app:layout_constraintBottom_toBottomOf="@id/tvShowPreferences"
+        android:text="test"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         />
 
     <TextView
@@ -104,9 +157,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvShowPreferences"
-        android:text="Acts Slightly Extroverted"
+        android:text="Slightly Extroverted"
         android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
         />
 
     <TextView
@@ -114,9 +170,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvPersonalityType"
-        android:text="Feels like eating something sweet"
+        android:text="Feels like eating something "
         android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/tvVariableFood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tvFoodPreferences"
+        app:layout_constraintTop_toTopOf="@+id/tvFoodPreferences"
+        app:layout_constraintBottom_toBottomOf="@id/tvFoodPreferences"
+        android:text="test"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+
         />
 
     <TextView
@@ -124,9 +194,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/tvFoodPreferences"
-        android:text="Cool, Collected, Calm"
+        android:text="Looking for a friend who is "
         android:layout_marginLeft="30dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/black"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:id="@+id/tvVariableAttitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toRightOf="@id/tvAttitude"
+        app:layout_constraintTop_toTopOf="@+id/tvAttitude"
+        app:layout_constraintBottom_toBottomOf="@id/tvAttitude"
+        android:text="test"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+
         />
 
     <Button
