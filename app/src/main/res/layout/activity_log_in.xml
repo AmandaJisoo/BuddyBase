@@ -45,7 +45,6 @@
         android:layout_marginBottom="20dp"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:maxLength="8"
         android:padding="10dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@id/etSignInEmail"

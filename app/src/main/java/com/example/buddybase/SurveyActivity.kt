@@ -23,6 +23,8 @@ class SurveyActivity: AppCompatActivity() {
             email.text = manager.email
             fullName.text = manager.fullName
         }
+
 //        Log.i("test", "${manager.matchedUids}")
+
     }
 }
