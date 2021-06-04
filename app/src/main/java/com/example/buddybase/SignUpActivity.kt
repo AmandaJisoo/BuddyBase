@@ -119,15 +119,20 @@ class SignUpActivity : AppCompatActivity() {
                         docRef.get()
                             .addOnSuccessListener { document ->
                                 if (document.data != null) {
-                                    //TODO: make this route to the home page instead of going to SurveyActivity
-                                    Log.i("eugene", "create user in firestore: user already exists")
-                                    Log.i("eugene", "data: ${document.data}")
-//                                    //TODO later move this to appropriate spot which is after running "algorithm"
-                                    if (document.data!!["Matched"] != null) {
-                                        manager.setMatchedUids(document.data!!["Matched"] as List<String>)
+//                                    //TODO: make this route to the home page instead of going to SurveyActivity
+//                                    Log.i("eugene", "create user in firestore: user already exists")
+//                                    Log.i("eugene", "data: ${document.data}")
+////                                    //TODO later move this to appropriate spot which is after running "algorithm"
+//                                    if (document.data!!["Matched"] != null) {
+//                                        manager.setMatchedUids(document.data!!["Matched"] as List<String>)
+//                                    }
+//                                    startActivity(Intent(this@SignUpActivity, SurveyActivity::class.java))
+//                                    finish()
+                                    val initAccessToken2 = AccessToken.getCurrentAccessToken()
+                                    if (initAccessToken2 != null && !initAccessToken2.isExpired) {
+                                        LoginManager.getInstance().logOut()
                                     }
-                                    startActivity(Intent(this@SignUpActivity, SurveyActivity::class.java))
-                                    finish()
+                                    Toast.makeText(this@SignUpActivity, "User already exists, please log in instead.", Toast.LENGTH_SHORT).show()
                                 } else {
                                     Log.i("eugene", "started the doc creation")
                                     addNewUserToFirestore(user)
@@ -142,8 +147,7 @@ class SignUpActivity : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("CreateAccountActivity", "signInWithCredential:failure", task.getException())
-                    Toast.makeText(this@SignUpActivity, "Authentication failed.",
-                            Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignUpActivity, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
             }
     }

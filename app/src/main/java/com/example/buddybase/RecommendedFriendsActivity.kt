@@ -16,12 +16,13 @@ class RecommendedFriendsActivity : AppCompatActivity() {
     lateinit var manager: UserManager
     lateinit var userApp: UserApplication
     lateinit var docRef: DocumentReference
+    lateinit var binding: ActivityRecommendedFriendsBinding
 //    private lateinit var rvRecommendedFriends: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding: ActivityRecommendedFriendsBinding = ActivityRecommendedFriendsBinding.inflate(layoutInflater).apply { setContentView(root) }
+        binding = ActivityRecommendedFriendsBinding.inflate(layoutInflater).apply { setContentView(root) }
 
 //        val friends = listOf("Eric", "Chee", "Justin", "Bieber", "Lady", "GAGA", "Captain", "America", "League", "Of", "Legends")
 
