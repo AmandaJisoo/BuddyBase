@@ -6,21 +6,27 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.buddybase.FriendDiffCallback
 import com.example.buddybase.UserApplication
 import com.example.buddybase.adapter.RecommendedFriendsAdapter
 import com.example.buddybase.databinding.FragmentRecommendedFriendsBinding
 import com.example.buddybase.manager.FriendManager
 import com.example.buddybase.manager.UserManager
+import com.example.buddybase.model.UserInfo
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
+import org.json.JSONObject
 
 class RecommendedFriendsFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
     lateinit var manager: UserManager
     lateinit var userApp: UserApplication
     lateinit var docRef: DocumentReference
+    lateinit var matchedWith: List<String>
 
     private lateinit var friendManager: FriendManager
+    private var matchedFriends: MutableList<UserInfo> = mutableListOf()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -39,7 +45,7 @@ class RecommendedFriendsFragment : Fragment() {
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    var matchedWith = document.data!!["Matched"] as List<String>
+                    matchedWith = document.data!!["Matched"] as List<String>
                     val mapOfMatches = getMapOfMatchedUsers(matchedWith, binding)
                     Log.i("forLeo", "expecting a map that's not empty below")
                     Log.i("forLeo", "$mapOfMatches") //logs "{}"
@@ -52,6 +58,13 @@ class RecommendedFriendsFragment : Fragment() {
             }
 
         // handle button clicks
+        with(binding) {
+            // swipe to refresh
+            srlRefreshFriendList.setOnRefreshListener {
+                getMapOfMatchedUsers(matchedWith, binding)
+                srlRefreshFriendList.isRefreshing = false
+            }
+        }
 
         return binding.root
     }
@@ -68,16 +81,36 @@ class RecommendedFriendsFragment : Fragment() {
                         mapOfMatches[document.data!!["FullName"]] = document.data!!
                         if (size == 0) {
                             Log.i("forLeo", "$mapOfMatches")
+//                            Log.i("matchesReference", "${(mapOfMatches["Ken Jeong"] as Map<String, Any>)["ImageProfilePic"]}")
                             val matches = mapOfMatches as Map<String, Any>
-                            val adapter = RecommendedFriendsAdapter(matches)
+
+
+                            for ((userName, value) in matches) {
+                                val gson = Gson()
+                                val friendInfo = value as Map<String, Any>
+                                val userInfo = gson.fromJson(JSONObject(friendInfo).toString(), UserInfo::class.java)
+                                val profilePicRef = (friendInfo["ImageProfilePic"] as com.google.firebase.firestore.DocumentReference).path
+                                userInfo.ImageProfilePic = profilePicRef
+                                matchedFriends.add(userInfo)
+                            }
+
+
+//                            Log.i("matchesReference", "${(matches["Ken Jeong"] as Map<String, Any>)["ImageProfilePic"]}")
+//                            val adapter = RecommendedFriendsAdapter(matches)
+                            friendManager.loadRecommendedFriends(matchedFriends)
+                            val adapter = RecommendedFriendsAdapter(friendManager.recommendedFriends)
                             adapter.onLikeClickListener = { friend ->
-//                                tvSongInfo.text = root.context.getString(R.string.song_info_format, song.title, song.artist)
-//                                clSongInfo.isInvisible = false
-//                                currentlyPlaying = song
-//                                musicManager.onSongSelected(song)
+//                                btnLike.isClickable = false
                                 friendManager.onLikeClick(friend)
+                            }
+                            adapter.onRemoveClickListener = { friend ->
+                                friendManager.onRecommendRemoveClick(friend)
+//                                adapter.updateFriends(friendManager.recommendedFriends)
+//                                friendManager.onRecommendRemoveClick(friend)
+//                                adapter.notifyDataSetChanged()
 
                             }
+
                             binding.rvRecommendedFriends.adapter = adapter
                         }
                     } else {

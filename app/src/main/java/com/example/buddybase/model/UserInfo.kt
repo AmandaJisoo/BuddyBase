@@ -1,4 +1,5 @@
 package com.example.buddybase.model
+import com.google.firebase.firestore.DocumentReference
 
 // This should match Firebase: Users (collection)
 
@@ -6,7 +7,8 @@ package com.example.buddybase.model
 data class UserInfo (
     val Email: String,
     val FullName: String,
-    val ImageProfilePic: String,
+//    val ImageProfilePic: String,
+    var ImageProfilePic: String,
     val Matched: List<String>,
     val Q_FriendType: List<String>,
     val Q_Music: List<String>,
