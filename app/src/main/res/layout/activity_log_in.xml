@@ -1,68 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LogInActivity">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/ic_buddybase"
+        android:layout_marginTop="50dp"
+        app:layout_constraintDimensionRatio="2"
+        app:layout_constraintBottom_toTopOf="@+id/etSignInEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        app:title="Log In"
-        app:titleTextColor="#000000" />
 
     <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
+        android:id="@+id/etSignInEmail"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_login"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="60dp"
-        android:drawablePadding="10dp"
-        android:hint="Email"
+        android:layout_margin="20dp"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:paddingBottom="20dp">
-
-    </EditText>
-
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@id/etSignInPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivLogo"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:background="@drawable/btn_buddybase_default"
+        android:backgroundTint="#EBEBEB"
+        />
 
     <EditText
-
-        android:id="@+id/password"
-        android:layout_width="match_parent"
+        android:id="@+id/etSignInPassword"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/email"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="11dp"
-        android:layout_marginRight="20dp"
-        android:drawablePadding="10dp"
-        android:paddingBottom="20dp"
-        android:hint="Password"
-        android:inputType="textPassword" />
-
+        android:layout_marginBottom="20dp"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:maxLength="8"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@id/etSignInEmail"
+        app:layout_constraintStart_toStartOf="@id/etSignInEmail"
+        app:layout_constraintTop_toBottomOf="@id/etSignInEmail"
+        android:background="@drawable/btn_buddybase_default"
+        android:backgroundTint="#EBEBEB"
+        />
 
     <Button
-
-        android:id="@+id/login_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_below="@+id/password"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:text="Log In"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:id="@+id/btnSignIn"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginVertical="20dp"
+        android:textSize="12sp"
         android:textAllCaps="false"
-        android:background="#00008b"
-        android:enabled="false"/>
+        android:text="@string/sign_in"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="@id/etSignInPassword"
+        app:layout_constraintStart_toStartOf="@id/etSignInPassword"
+        app:layout_constraintTop_toBottomOf="@id/etSignInPassword"
+        android:background="@drawable/btn_buddybase_default"/>
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/or"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignIn"
+        android:gravity="center_horizontal" />
 
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/btnFacebookSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
+        android:layout_centerInParent="true"/>
 
+    <TextView
+        android:id="@+id/tvSignUpInstead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center_horizontal"
+        android:text="@string/tvSignUpInstead"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/btnSignIn"
+        app:layout_constraintHorizontal_bias="0.274"
+        app:layout_constraintStart_toStartOf="@+id/btnSignIn"
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebookSignUp" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/tvSwitchToSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="5dp"
+        android:text="Sign Up Now"
+        android:textColor="@color/blue_buddybase"
+        android:textAlignment="center"
+        app:layout_constraintStart_toEndOf="@+id/tvSignUpInstead"
+        app:layout_constraintTop_toBottomOf="@+id/btnFacebookSignUp"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="10dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
