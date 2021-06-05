@@ -174,6 +174,12 @@ class SignUpActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             var emailUser = firebaseAuth!!.currentUser!!
                             addNewUserToFirestore(emailUser)
+                            user = firebaseAuth!!.currentUser!!
+                            user?.let {
+                                manager.setEmail(user.email.toString())
+                                manager.setFullName(user.displayName.toString())
+                                manager.setUid(user.uid)
+                            }
                             startActivity(Intent(this, SignUpStartActivity::class.java))
                             finish()
                         } else {

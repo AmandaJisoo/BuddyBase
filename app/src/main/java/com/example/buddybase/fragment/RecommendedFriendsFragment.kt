@@ -77,8 +77,6 @@ class RecommendedFriendsFragment : Fragment() {
 
         }
         binding.rvRecommendedFriends.adapter = adapter
-
-
         // handle button clicks
 //        with(binding) {
 //            // swipe to refresh
