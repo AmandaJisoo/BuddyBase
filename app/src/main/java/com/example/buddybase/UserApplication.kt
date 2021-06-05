@@ -2,6 +2,7 @@ package com.example.buddybase
 
 import android.app.Application
 import com.example.buddybase.manager.FriendManager
+import com.example.buddybase.manager.NotificationManager
 import com.example.buddybase.manager.UserManager
 import com.example.buddybase.model.UserInfo
 //import com.google.firebase.firestore.auth.UserInfo
@@ -11,6 +12,7 @@ class UserApplication : Application() {
 //    lateinit var recommendedFriends: List<UserInfo>
 //    lateinit var likedFriends: List<UserInfo>
     lateinit var friendManager: FriendManager
+    lateinit var notificationManager: NotificationManager
 
     // TODO: list of Notification
 
@@ -20,6 +22,8 @@ class UserApplication : Application() {
         this.friendManager = FriendManager()
 
         this.userManager = UserManager()
+
+        this.notificationManager = NotificationManager()
 
         // TODO: init list of recommendedFriends
 
