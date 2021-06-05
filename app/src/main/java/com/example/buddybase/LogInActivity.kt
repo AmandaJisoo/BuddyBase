@@ -158,7 +158,10 @@ class LogInActivity : AppCompatActivity() {
             firebaseAuth!!.signInWithEmailAndPassword(etSignInEmail.text.toString().trim(), etSignInPassword.text.toString().trim())
                     .addOnCompleteListener { signIn ->
                         if (signIn.isSuccessful) {
+
                             //TODO: change to "home" activity
+                            user = firebaseAuth!!.currentUser!!
+                            docRef = db.collection("Users").document(user.uid)
                             docRef.get()
                                     .addOnSuccessListener { document ->
                                         if (document.data != null) {

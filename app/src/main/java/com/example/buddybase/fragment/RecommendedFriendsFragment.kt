@@ -59,12 +59,20 @@ class RecommendedFriendsFragment : Fragment() {
         val mapOfMatches = manager.matchedUsers
         val matches = mapOfMatches as Map<String, Any>
         for ((userName, value) in matches) {
-            Log.i("breakingStuff", "${matches}")
+//            Log.i("breakinguserInfo", "${value}")
             val gson = Gson()
             val friendInfo = value as Map<String, Any>
+//            Log.i("breakinguserInfo", "${friendInfo["Matched"]?.javaClass?.name}")
+            Log.i("breakinguserInfo2", "${friendInfo["Q_Music"]?.javaClass?.name}")
+
+            Log.i("breakinguserInfo2", "${JSONObject(friendInfo)["Q_Music"]?.javaClass?.name}")
+//            Log.i("breakinguserInfo3", "${ JSONObject(friendInfo) }")
             val userInfo = gson.fromJson(JSONObject(friendInfo).toString(), UserInfo::class.java)
-            val profilePicRef = (friendInfo["ImageProfilePic"] as com.google.firebase.firestore.DocumentReference).path
-            userInfo.ImageProfilePic = profilePicRef
+//            Log.i("breakinguserInfo", "${userInfo}")
+//            Log.i("breakinguserInfo3", "${ userInfo }")
+
+//            val profilePicRef = (friendInfo["ImageProfilePic"] as DocumentReference).path
+//            userInfo.ImageProfilePic = profilePicRef
             matchedFriends.add(userInfo)
         }
         friendManager.loadRecommendedFriends(matchedFriends)
