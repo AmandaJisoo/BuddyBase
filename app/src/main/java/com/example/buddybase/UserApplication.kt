@@ -26,7 +26,6 @@ class UserApplication : Application() {
         this.notificationManager = NotificationManager()
 
         // TODO: init list of recommendedFriends
-//        this.recommendedFriends =
 
     }
 }

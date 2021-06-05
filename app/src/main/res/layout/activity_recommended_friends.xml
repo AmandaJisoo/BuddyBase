@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RecommendedFriendsActivity"
     >
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvRecommendedFriends"
         android:layout_width="0dp"
@@ -17,6 +18,5 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_recommended_friend"
         />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,8 +9,6 @@ class UserManager {
         private set
     var matchedUids: List<String>? = null
         private set
-    var matchedUsers: Map<String, Any>? = null
-        private set
 
     fun setEmail(email: String) {
         this.email = email
@@ -26,9 +24,5 @@ class UserManager {
 
     fun setMatchedUids(matched: List<String>) {
         this.matchedUids = matched
-    }
-
-    fun setMatchedUsers(matched: Map<String, Any>) {
-        this.matchedUsers = matched
     }
 }

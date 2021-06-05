@@ -14,71 +14,50 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="23sp"
-        android:layout_marginTop="30dp"
         android:visibility="visible"
         android:gravity="center_horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        tools:ignore="MissingConstraints" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/gridViewContainer"
+    <GridView
+        android:id="@+id/gridView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question"
-        app:layout_constraintBottom_toTopOf="@+id/btnContainer"
-        >
-
-        <GridView
-            android:id="@+id/gridView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-
-
-
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
-        </GridView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp" >
+    </GridView>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnContainer"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gridViewContainer">
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" >
 
 
         <Button
             android:id="@+id/questionSubmitBtn"
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:layout_margin="40dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="@string/next"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gridView"
+            android:text="@string/submit"
             tools:ignore="NotSibling" />
 
 
         <ImageButton
             android:id="@+id/processBar"
-            android:layout_width="0dp"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            android:layout_marginTop="40dp"
+            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintTop_toBottomOf="@id/questionSubmitBtn"
-            app:layout_constraintStart_toStartOf="@+id/questionSubmitBtn"
-            app:layout_constraintEnd_toEndOf="@+id/questionSubmitBtn"/>
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+<!--            app:layout_constraintBottom_toBottomOf="parent" -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

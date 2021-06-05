@@ -4,11 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.buddybase.databinding.ItemLikedFriendBinding
-import com.example.buddybase.manager.FriendManager
 import com.example.buddybase.model.UserInfo
-
-private lateinit var friendManager: FriendManager
-private var matchedFriends: MutableList<UserInfo> = mutableListOf()
 
 class LikedFriendsAdapter(private val likedFriends: List<UserInfo>): RecyclerView.Adapter<LikedFriendsAdapter.LikedFriendViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikedFriendViewHolder {
