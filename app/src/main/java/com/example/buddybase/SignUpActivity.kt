@@ -136,7 +136,7 @@ class SignUpActivity : AppCompatActivity() {
                                 } else {
                                     Log.i("eugene", "started the doc creation")
                                     addNewUserToFirestore(user)
-                                    startActivity(Intent(this@SignUpActivity, SurveyActivity::class.java))
+                                    startActivity(Intent(this@SignUpActivity, SignUpStartActivity::class.java))
                                     finish()
                                 }
                             }
@@ -174,7 +174,7 @@ class SignUpActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             var emailUser = firebaseAuth!!.currentUser!!
                             addNewUserToFirestore(emailUser)
-                            startActivity(Intent(this, SurveyActivity::class.java))
+                            startActivity(Intent(this, SignUpStartActivity::class.java))
                             finish()
                         } else {
                             Toast.makeText(this@SignUpActivity, "failed to Authenticate !", Toast.LENGTH_SHORT).show()

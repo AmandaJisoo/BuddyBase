@@ -119,8 +119,23 @@ class LogInActivity : AppCompatActivity() {
                                                 //TODO: instead of setting manager to "Matched", set it to the matchedUsers Map
                                                 manager.setMatchedUids(document.data!!["Matched"] as List<String>)
                                             }
-                                            startActivity(Intent(this@LogInActivity, SurveyActivity::class.java))
-                                            finish()
+
+                                            val docRef1 = db.collection("Users")
+                                            val matchedMap = mutableMapOf<String, Any>()
+                                            docRef1.get()
+                                                    .addOnSuccessListener { result ->
+                                                        for (document in result) {
+                                                            if (document.data.size > 8) {
+                                                                matchedMap[document.data["FullName"] as String] = document.data
+                                                            }
+                                                        }
+                                                        manager.setMatchedUsers(matchedMap)
+                                                        startActivity(Intent(this@LogInActivity, HomeActivity::class.java))
+                                                        finish()
+                                                    }
+                                                    .addOnFailureListener { exception ->
+                                                        Log.d("rawr", "get failed with ", exception)
+                                                    }
                                         } else {
                                             Log.i("eugene", "user doesn't exist")
                                             Toast.makeText(this@LogInActivity, "User not found, please sign up or try again", Toast.LENGTH_SHORT).show()
@@ -154,7 +169,7 @@ class LogInActivity : AppCompatActivity() {
                     .addOnCompleteListener { signIn ->
                         if (signIn.isSuccessful) {
                             //TODO: change to "home" activity
-                            startActivity(Intent(this, SurveyActivity::class.java))
+                            startActivity(Intent(this, HomeActivity::class.java))
                             finish()
                         } else {
                             Toast.makeText(this@LogInActivity, "sign in failed", Toast.LENGTH_SHORT).show()

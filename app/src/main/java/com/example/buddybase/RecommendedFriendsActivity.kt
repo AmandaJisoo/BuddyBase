@@ -35,54 +35,58 @@ class RecommendedFriendsActivity : AppCompatActivity() {
         userApp = this.applicationContext as UserApplication
         manager = this.userApp.userManager
 
-        db = FirebaseFirestore.getInstance()
-//        var uid = manager.uid
-//        docRef = uid?.let { db.collection("Users").document(it) }!!
+        Log.i("sushi", "${manager.matchedUsers}")
+        val adapter = RecommendedFriendsAdapter(manager.matchedUsers!!)
+        binding.rvRecommendedFriends.adapter = adapter
 
-        //TODO: for now document("aBhsZO73GMe1a09xrMUemyZJB2q1") is hardcoded because this activity isn't linked to the signup/login flow
-        docRef = db.collection("Users").document("aBhsZO73GMe1a09xrMUemyZJB2q1")
-        docRef.get()
-                .addOnSuccessListener { document ->
-                    if (document != null) {
-//                        var mapOfMatches: MutableMap<Any?, Any>
-                        var matchedWith = document.data!!["Matched"] as List<String>
-                        val mapOfMatches = getMapOfMatchedUsers(matchedWith, binding)
-//                        var size = matchedWith.size
-//                        val mapOfMatches: MutableMap<Any?, Any> = HashMap()
-//                        val docRef2 = db.collection("Users")
-//                        matchedWith.forEach {
-//                            docRef2.document(it).get()
-//                                    .addOnSuccessListener { document ->
-//                                        if (document != null) {
-//                                            size--
-//                                            mapOfMatches[document.data!!["FullName"]] = document.data!!
-//                                            if (size == 0) {
-//                                                Log.i("forLeo", "$mapOfMatches")
+//        db = FirebaseFirestore.getInstance()
+////        var uid = manager.uid
+////        docRef = uid?.let { db.collection("Users").document(it) }!!
 //
-////                                                val keys = mapOfMatches.keys.toMutableList() as MutableList<String>
-//
-//
-////                                                val adapter = RecommendedFriendsAdapter(keys)
-//                                                val adapter = RecommendedFriendsAdapter(mapOfMatches)
-//                                                binding.rvRecommendedFriends.adapter = adapter
-//                                            }
-//                                        } else {
-//                                            Log.i("forLeo", "could not find user doc")
-//                                        }
-//                                    }
-//                                    .addOnFailureListener { exception ->
-//                                        Log.i("forLeo", "setMatched failed with ", exception)
-//                                    }
-//                        }
-                        Log.i("forLeo", "expecting a map that's not empty below")
-                        Log.i("forLeo", "$mapOfMatches") //logs "{}"
-                    } else {
-                        Log.i("forLeo", "error doc doesn't exist")
-                    }
-                }
-                .addOnFailureListener { exception ->
-                    Log.i("forLeo", "something wrong:", exception)
-                }
+//        //TODO: for now document("aBhsZO73GMe1a09xrMUemyZJB2q1") is hardcoded because this activity isn't linked to the signup/login flow
+//        docRef = db.collection("Users").document(manager.uid!!)
+//        docRef.get()
+//                .addOnSuccessListener { document ->
+//                    if (document != null) {
+////                        var mapOfMatches: MutableMap<Any?, Any>
+//                        var matchedWith = document.data!!["Matched"] as List<String>
+//                        val mapOfMatches = getMapOfMatchedUsers(matchedWith, binding)
+////                        var size = matchedWith.size
+////                        val mapOfMatches: MutableMap<Any?, Any> = HashMap()
+////                        val docRef2 = db.collection("Users")
+////                        matchedWith.forEach {
+////                            docRef2.document(it).get()
+////                                    .addOnSuccessListener { document ->
+////                                        if (document != null) {
+////                                            size--
+////                                            mapOfMatches[document.data!!["FullName"]] = document.data!!
+////                                            if (size == 0) {
+////                                                Log.i("forLeo", "$mapOfMatches")
+////
+//////                                                val keys = mapOfMatches.keys.toMutableList() as MutableList<String>
+////
+////
+//////                                                val adapter = RecommendedFriendsAdapter(keys)
+////                                                val adapter = RecommendedFriendsAdapter(mapOfMatches)
+////                                                binding.rvRecommendedFriends.adapter = adapter
+////                                            }
+////                                        } else {
+////                                            Log.i("forLeo", "could not find user doc")
+////                                        }
+////                                    }
+////                                    .addOnFailureListener { exception ->
+////                                        Log.i("forLeo", "setMatched failed with ", exception)
+////                                    }
+////                        }
+//                        Log.i("forLeo", "expecting a map that's not empty below")
+//                        Log.i("forLeo", "$mapOfMatches") //logs "{}"
+//                    } else {
+//                        Log.i("forLeo", "error doc doesn't exist")
+//                    }
+//                }
+//                .addOnFailureListener { exception ->
+//                    Log.i("forLeo", "something wrong:", exception)
+//                }
     }
 
     private fun getMapOfMatchedUsers(matched: List<String>, binding: ActivityRecommendedFriendsBinding): MutableMap<Any?, Any> {
