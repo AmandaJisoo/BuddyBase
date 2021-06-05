@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpConfirmActivity"
+    android:id="@+id/confirmPage">
+
+    <TextView
+        android:id="@+id/tvBasicInfoTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Basic Information"
+        android:textColor="@color/blue_buddybase"
+        android:textSize="30sp"
+        android:textFontWeight="500"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/etFullName"/>
+
+    <ImageButton
+        android:id="@+id/previousBtn"
+        android:layout_width="0dp"
+        android:layout_height="190dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/upload_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvBasicInfoTitle"
+        android:contentDescription="@string/you_are_all_set_msg" />
+
+    <EditText
+        android:id="@+id/etFullName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:hint="Full name"
+        android:padding="15dp"
+        app:layout_constraintBottom_toTopOf="@id/etEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/previousBtn"
+        android:background="@drawable/btn_buddybase_default"
+        android:backgroundTint="#EBEBEB"
+        />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="@id/etFullName"
+        app:layout_constraintStart_toStartOf="@id/etFullName"
+        app:layout_constraintTop_toBottomOf="@id/etFullName"
+        android:background="@drawable/btn_buddybase_default"
+        android:backgroundTint="#EBEBEB"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btnContainer"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <Button
+            android:id="@+id/btnStartSurvey"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:layout_margin="40dp"
+            android:padding="15dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="NotSibling" />
+
+        <ImageButton
+            android:id="@+id/processBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/sign_up_1"
+            app:layout_constraintTop_toBottomOf="@id/btnStartSurvey"
+            app:layout_constraintStart_toStartOf="@+id/btnStartSurvey"
+            app:layout_constraintEnd_toEndOf="@+id/btnStartSurvey"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
