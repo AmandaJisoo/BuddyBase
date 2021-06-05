@@ -1,5 +1,7 @@
 package com.example.buddybase
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -7,18 +9,25 @@ import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import coil.load
 import com.example.buddybase.databinding.ActivityProfileBinding
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FileDownloadTask
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.launch
+import java.io.File
+import java.io.IOException
 
 // ID for "Bill Gates"
 private const val TEST_DATA = "5uuWVzvVphYMEX8XMy5d"
+private const val STORAGE_URL = "gs://buddybase-efd0e.appspot.com/user_profile_pics"
 
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     private lateinit var personDataTemp: Map<String, Any>
     private lateinit var failMsg: String
+    private lateinit var profPicBitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,19 +53,25 @@ class ProfileActivity : AppCompatActivity() {
                         if (document != null) {
                             personDataTemp = document.data as Map<String, Any>
 
-                            // Debug code to look at where prof pic image is supposed to be
-                            val picReference: DocumentReference = personDataTemp["ImageProfilePic"] as DocumentReference
-                            picReference.get()
-                                .addOnSuccessListener { document ->
-                                    if (document != null) {
-                                        Log.d("loadDataMsg", document.getData().toString())
-                                    } else {
-                                        Log.d("loadDataMsg", "pic didn't retrieve")
+
+//                          Gets image based on document id from firebase storage
+                            var storage: FirebaseStorage = FirebaseStorage.getInstance()
+                            var storageReference = storage.getReferenceFromUrl(STORAGE_URL).child("${document.id}.jpg")
+                            try {
+                                var localFile: File = File.createTempFile("images", "jpg")
+                                storageReference.getFile(localFile)
+                                    .addOnSuccessListener {
+                                        profPicBitmap = BitmapFactory.decodeFile(localFile.absolutePath)
                                     }
-                                }
+                                    .addOnFailureListener {
+
+                                    }
+                                localFile.deleteOnExit()
+                            } catch (e: IOException) {}
+
 
                             with(binding) {
-                                //ivVariableProfPic.load(personDataTemp["ImageProfilePic"])
+                                ivVariableProfPic.load(profPicBitmap)
                                 tvName.text = "${personDataTemp["FullName"]}"
                                 tvVariableAnimal.text = "${personDataTemp["Q_Pet"]}"
                                 tvVariableMusic.text = "${personDataTemp["Q_Music"].toString().drop(1).dropLast(1)}"
