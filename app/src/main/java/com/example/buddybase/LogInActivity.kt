@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 
 class LogInActivity : AppCompatActivity() {
     var callbackManager: CallbackManager? = null
@@ -34,6 +37,8 @@ class LogInActivity : AppCompatActivity() {
     lateinit var btnSignIn: Button
     lateinit var etSignInEmail: EditText
     lateinit var etSignInPassword: EditText
+
+    lateinit var firebaseStorageReference: StorageReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +71,9 @@ class LogInActivity : AppCompatActivity() {
         callbackManager = CallbackManager.Factory.create()
         facebookSignInButton = findViewById<View>(R.id.btnFacebookSignUp) as LoginButton
         facebookSignInButton.setReadPermissions("email")
+
+        firebaseStorageReference = Firebase.storage("gs://buddybase-efd0e.appspot.com/").reference
+        manager.setStorageRef(firebaseStorageReference)
 
         val initAccessToken = AccessToken.getCurrentAccessToken()
         if (initAccessToken != null && !initAccessToken.isExpired) {
@@ -119,8 +127,23 @@ class LogInActivity : AppCompatActivity() {
                                                 //TODO: instead of setting manager to "Matched", set it to the matchedUsers Map
                                                 manager.setMatchedUids(document.data!!["Matched"] as List<String>)
                                             }
-                                            startActivity(Intent(this@LogInActivity, SurveyActivity::class.java))
-                                            finish()
+
+                                            val docRef1 = db.collection("Users")
+                                            val matchedMap = mutableMapOf<String, Any>()
+                                            docRef1.get()
+                                                    .addOnSuccessListener { result ->
+                                                        for (document in result) {
+                                                            if (document.data.size > 8) {
+                                                                matchedMap[document.data["FullName"] as String] = document.data
+                                                            }
+                                                        }
+                                                        manager.setMatchedUsers(matchedMap)
+                                                        startActivity(Intent(this@LogInActivity, HomeActivity::class.java))
+                                                        finish()
+                                                    }
+                                                    .addOnFailureListener { exception ->
+                                                        Log.d("rawr", "get failed with ", exception)
+                                                    }
                                         } else {
                                             Log.i("eugene", "user doesn't exist")
                                             Toast.makeText(this@LogInActivity, "User not found, please sign up or try again", Toast.LENGTH_SHORT).show()
@@ -138,24 +161,48 @@ class LogInActivity : AppCompatActivity() {
                 }
     }
 
-    private fun addNewUserToFirestore(user: FirebaseUser) {
-        val userDetails = hashMapOf(
-                "FullName" to user.displayName,
-                "Email" to user.email
-        )
-        db.collection("Users").document(user.uid).set(userDetails)
-                .addOnSuccessListener { Log.i("eugene", "New User Added to Firestore: DocumentSnapshot successfully written!") }
-                .addOnFailureListener { e -> Log.i("eugene", "New User Error Adding to Firestore: Error writing document", e) }
-    }
-
     private fun signInUser() {
         if (notEmpty()) {
             firebaseAuth!!.signInWithEmailAndPassword(etSignInEmail.text.toString().trim(), etSignInPassword.text.toString().trim())
                     .addOnCompleteListener { signIn ->
                         if (signIn.isSuccessful) {
+
                             //TODO: change to "home" activity
-                            startActivity(Intent(this, SurveyActivity::class.java))
-                            finish()
+                            user = firebaseAuth!!.currentUser!!
+                            docRef = db.collection("Users").document(user.uid)
+                            docRef.get()
+                                    .addOnSuccessListener { document ->
+                                        if (document.data != null) {
+                                            //TODO: make this route to the home page instead of going to SurveyActivity
+                                            if (document.data!!["Matched"] != null) {
+                                                //TODO: instead of setting manager to "Matched", set it to the matchedUsers Map
+                                                manager.setMatchedUids(document.data!!["Matched"] as List<String>)
+                                            }
+
+                                            val docRef1 = db.collection("Users")
+                                            val matchedMap = mutableMapOf<String, Any>()
+                                            docRef1.get()
+                                                    .addOnSuccessListener { result ->
+                                                        for (document in result) {
+                                                            if (document.data.size > 8) {
+                                                                matchedMap[document.data["FullName"] as String] = document.data
+                                                            }
+                                                        }
+                                                        manager.setMatchedUsers(matchedMap)
+                                                        startActivity(Intent(this@LogInActivity, HomeActivity::class.java))
+                                                        finish()
+                                                    }
+                                                    .addOnFailureListener { exception ->
+                                                        Log.d("rawr", "get failed with ", exception)
+                                                    }
+                                        } else {
+                                            Log.i("eugene", "user doesn't exist")
+                                            Toast.makeText(this@LogInActivity, "User not found, please sign up or try again", Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                    .addOnFailureListener { exception ->
+                                        Log.i("eugene", "something wrong:", exception)
+                                    }
                         } else {
                             Toast.makeText(this@LogInActivity, "sign in failed", Toast.LENGTH_SHORT).show()
                         }
