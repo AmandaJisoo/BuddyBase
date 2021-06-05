@@ -22,10 +22,12 @@ class SignUpStartActivity: AppCompatActivity() {
 
         with (binding) {
             if (manager.email != null) {
-                etFullName.setText(manager.email)
+                etEmail.setText(manager.email)
             }
-            if (manager.fullName != null) {
-                etEmail.setText(manager.fullName)
+            if (manager.fullName != null && manager.fullName != "null") {
+                etEmail.setText(manager.email)
+                etFullName.setText(manager.fullName)
+
             }
 
             btnStartSurvey.setOnClickListener {

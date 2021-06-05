@@ -35,7 +35,7 @@ class RecommendedFriendsFragment : Fragment() {
         db = FirebaseFirestore.getInstance()
 
         //TODO: for now document("aBhsZO73GMe1a09xrMUemyZJB2q1") is hardcoded because this activity isn't linked to the signup/login flow
-        docRef = db.collection("Users").document("aBhsZO73GMe1a09xrMUemyZJB2q1")
+        docRef = db.collection("Users").document(manager.uid!!)
         docRef.get()
             .addOnSuccessListener { document ->
                 if (document != null) {
