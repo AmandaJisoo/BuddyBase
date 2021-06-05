@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RecommendedFriendsActivity"
-    >
+    tools:context=".fragment.RecommendedFriendsFragment">
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlRefreshFriendList"
         android:layout_width="match_parent"
