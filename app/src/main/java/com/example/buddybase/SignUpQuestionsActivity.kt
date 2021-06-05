@@ -73,7 +73,7 @@ class SignUpQuestionsActivity : AppCompatActivity() {
                 val keyList = listOf<String>("Q_Pet", "Q_Music", "Q_Show", "Q_Personality", "Q_Taste", "Q_FriendType")
                 for (item in keyList) {
                     var value: Any
-                    if (selectedItemsMap.getValue(keyList.indexOf(item)).size == 1) {
+                    if (keyList.indexOf(item) == 0 || keyList.indexOf(item) == 2 || keyList.indexOf(item) == 4) {
                         value = selectedItemsMap.getValue(keyList.indexOf(item))[0]
                     } else {
                         value = selectedItemsMap.getValue(keyList.indexOf(item))
