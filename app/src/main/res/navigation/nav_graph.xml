@@ -22,6 +22,12 @@
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
 
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.buddybase.fragment.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
+
     <action
         android:id="@+id/action_global_recommendedFriendsFragment"
         app:destination="@id/recommendedFriendsFragment" />
@@ -32,4 +38,8 @@
     <action
         android:id="@+id/action_global_notificationsFragment"
         app:destination="@id/notificationsFragment" />
+
+    <action
+        android:id="@+id/action_global_ProfileFragment"
+        app:destination="@id/profileFragment" />
 </navigation>

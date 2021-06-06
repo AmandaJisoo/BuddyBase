@@ -1,66 +1,65 @@
-package com.example.buddybase
+package com.example.buddybase.fragment
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import com.example.buddybase.R
 import com.example.buddybase.databinding.ActivityProfileBinding
-import com.google.android.gms.tasks.OnSuccessListener
+import com.example.buddybase.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FileDownloadTask
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 
-// ID for "Bill Gates"
-//private const val TEST_DATA = "5uuWVzvVphYMEX8XMy5d"
-//private const val STORAGE_URL = "gs://buddybase-efd0e.appspot.com/user_profile_pics"
+private const val TEST_DATA = "5uuWVzvVphYMEX8XMy5d"
+private const val STORAGE_URL = "gs://buddybase-efd0e.appspot.com/user_profile_pics"
 
-class ProfileActivity : AppCompatActivity() {
+class ProfileFragment : Fragment() {
 
-    private lateinit var binding: ActivityProfileBinding
+    private lateinit var binding: FragmentProfileBinding
     private lateinit var personDataTemp: Map<String, Any>
     private lateinit var failMsg: String
     private lateinit var profPicBitmap: Bitmap
     private lateinit var auth: FirebaseAuth
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityProfileBinding.inflate(layoutInflater).apply { setContentView(root) }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentProfileBinding.inflate(inflater)
         auth = Firebase.auth
-        with(binding) {
 
+        with(binding) {
             btnTempPull.setOnClickListener {
                 loadData(binding)
             }
         }
+
+        return binding.root
     }
 
     override fun onStart() {
         super.onStart()
 
         val currentUser = auth.currentUser
-        Log.i("currentUser", currentUser.toString())
-        // pull data based on auth.currentUser
-        // loadData(binding, auth.currentUser) or smth
     }
 
-    // TODO: Copy this function so that it gets called when profile is tapped from the tab bar
-    private fun loadData(binding: ActivityProfileBinding) {
+    private fun loadData(binding: FragmentProfileBinding) {
         lifecycleScope.launch {
             runCatching {
                 val firestore = FirebaseFirestore.getInstance()
-                val docRef = firestore.collection("Users").document("5uuWVzvVphYMEX8XMy5d")
+                val docRef = firestore.collection("Users").document(TEST_DATA)
                 docRef.get()
                     .addOnSuccessListener { document ->
                         if (document != null) {
@@ -69,7 +68,7 @@ class ProfileActivity : AppCompatActivity() {
 
 //                          Gets image based on document id from firebase storage
                             var storage: FirebaseStorage = FirebaseStorage.getInstance()
-                            var storageReference = storage.getReferenceFromUrl("gs://buddybase-efd0e.appspot.com/user_profile_pics").child("${document.id}.jpg")
+                            var storageReference = storage.getReferenceFromUrl(STORAGE_URL).child("${document.id}.jpg")
                             try {
                                 var localFile: File = File.createTempFile("images", "jpg")
                                 storageReference.getFile(localFile)
@@ -105,4 +104,5 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
 }

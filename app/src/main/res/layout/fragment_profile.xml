@@ -35,15 +35,15 @@
 
     </androidx.cardview.widget.CardView>
 
-<!--    <ImageView-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:src="@drawable/profile_circle"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintRight_toRightOf="@id/ivProfPic"-->
-<!--        />-->
+    <!--    <ImageView-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:src="@drawable/profile_circle"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintRight_toRightOf="@id/ivProfPic"-->
+    <!--        />-->
 
     <TextView
         android:id="@+id/tvName"
