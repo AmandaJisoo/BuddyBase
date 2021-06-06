@@ -13,15 +13,12 @@ import com.example.buddybase.manager.FriendManager
 import com.example.buddybase.manager.UserManager
 import com.example.buddybase.model.UserInfo
 import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import org.json.JSONObject
 
 class RecommendedFriendsFragment : Fragment() {
-    private lateinit var db: FirebaseFirestore
     lateinit var manager: UserManager
     lateinit var userApp: UserApplication
-//    lateinit var matchedWith: List<String>
 
     private lateinit var friendManager: FriendManager
     private lateinit var matchedFriends: MutableList<UserInfo>
@@ -40,7 +37,6 @@ class RecommendedFriendsFragment : Fragment() {
         with(binding) {
             // swipe to refresh
             srlRefreshFriendList.setOnRefreshListener {
-
 //                getMapOfMatchedUsers(matchedWith, binding)
                 loadRecommendedFriends(binding)
                 srlRefreshFriendList.isRefreshing = false
@@ -57,27 +53,25 @@ class RecommendedFriendsFragment : Fragment() {
         for ((userName, value) in matches) {
             val gson = Gson()
             var friendInfo = value as MutableMap<String, Any>
-//            FirebaseStorage
-            if (friendInfo["ImageProfilePic"] != null) {
-                friendInfo["ImageProfilePic"] =  (friendInfo["ImageProfilePic"] as DocumentReference).path
+            Log.i("StuffNotWorking", "${friendInfo}")
+            val imgProfilePic = friendInfo["ImageProfilePic"]
+            if (imgProfilePic != null) {
+
+                friendInfo["ImageProfilePic"] =  (imgProfilePic as DocumentReference).path
             }
 
-//            Log.i("fbsr", "${manager.firebaseStorageReference}")
-
-//            if (imgProfilePic != null) {
-//                friendInfo["ImageProfilePic"] =  imgProfilePic as DocumentReference
-//            }
-//            friendInfo["ImageProfilePic"] =
             val userInfo = gson.fromJson(JSONObject(friendInfo as Map<String, Any>).toString(), UserInfo::class.java)
-//            val imgProfilePic = friendInfo["ImageProfilePic"]
 
-//            friendInfo["ImageProfilePic"] as DocumentReference
-            Log.i("userInfosss", "${userInfo}")
+            if (imgProfilePic != null) {
+                friendInfo["ImageProfilePic"] = imgProfilePic
+            }
+
             matchedFriends.add(userInfo)
         }
         friendManager.loadRecommendedFriends(matchedFriends)
         val adapter = RecommendedFriendsAdapter(friendManager.recommendedFriends, manager.firebaseStorageReference)
         adapter.onLikeClickListener = { friend ->
+
             friendManager.onLikeClick(friend)
         }
         adapter.onRemoveClickListener = { friend ->

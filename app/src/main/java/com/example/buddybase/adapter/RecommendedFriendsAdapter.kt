@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.buddybase.FriendDiffCallback
 import com.example.buddybase.R
 import com.example.buddybase.databinding.ItemRecommendedFriendBinding
@@ -65,7 +66,11 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 val imgProfilePic = friend.ImageProfilePic
                 if (imgProfilePic != null) {
                     val imageRef = storageReference.child(imgProfilePic)
-                    ivFriendProfilePic.load(imageRef)
+                    ivFriendProfilePic.load(imageRef) {
+                        crossfade(true)
+                        placeholder(R.mipmap.ic_avatar_placeholder_round)
+                        transformations(CircleCropTransformation())
+                    }
                 }
             }
 
@@ -77,6 +82,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
             btnLike.setOnClickListener{
 //                btnLike.isClickable = false
                 onLikeClickListener(friend)
+                notifyDataSetChanged()
             }
 
             btnRemove.setOnClickListener {

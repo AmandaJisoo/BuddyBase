@@ -4,6 +4,8 @@ import android.util.Log
 import androidx.recyclerview.widget.DiffUtil
 import com.example.buddybase.FriendDiffCallback
 import com.example.buddybase.model.UserInfo
+import kotlinx.coroutines.delay
+import java.util.concurrent.TimeUnit
 
 
 class FriendManager {
@@ -19,7 +21,9 @@ class FriendManager {
     fun onLikeClick(friend: UserInfo) {
         newLikedFriend = friend
         likedFriends.add(newLikedFriend)
-        Log.i("likedFriends", "added")
+//        delay(5, TimeUnit.MILLISECONDS)
+        this.recommendedFriends.remove(friend)
+//        Log.i("likedFriends", "added")
     }
 
 
