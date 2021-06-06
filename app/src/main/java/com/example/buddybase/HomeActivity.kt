@@ -18,6 +18,9 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater).apply { setContentView(root) }
         with(binding) {
+            // Hide ActionBar
+            supportActionBar?.hide()
+
             // disable auto color tint
             navBarView.itemIconTintList = null
 
