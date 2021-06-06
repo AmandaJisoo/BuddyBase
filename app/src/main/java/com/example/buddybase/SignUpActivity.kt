@@ -13,6 +13,7 @@ import com.example.buddybase.manager.UserManager
 import com.facebook.*
 import com.facebook.AccessToken
 import com.facebook.appevents.AppEventsLogger
+import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.FacebookAuthProvider
@@ -71,6 +72,11 @@ class SignUpActivity : AppCompatActivity() {
         facebookSignInButton = findViewById<View>(R.id.btnFacebookSignUp) as LoginButton
         facebookSignInButton.setReadPermissions("email")
 
+        val initAccessToken = AccessToken.getCurrentAccessToken()
+        if (initAccessToken != null && !initAccessToken.isExpired) {
+            LoginManager.getInstance().logOut()
+        }
+
         // Callback registration
         facebookSignInButton.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
@@ -113,18 +119,25 @@ class SignUpActivity : AppCompatActivity() {
                         docRef.get()
                             .addOnSuccessListener { document ->
                                 if (document.data != null) {
-                                    //TODO: make this route to the home page instead of going to SurveyActivity
-                                    Log.i("eugene", "create user in firestore: user already exists")
-                                    Log.i("eugene", "data: ${document.data}")
-//                                    //TODO later move this to appropriate spot which is after running "algorithm"
-                                    if (document.data!!["Matched"] != null) {
-                                        manager.setMatchedUids(document.data!!["Matched"] as List<String>)
+//                                    //TODO: make this route to the home page instead of going to SurveyActivity
+//                                    Log.i("eugene", "create user in firestore: user already exists")
+//                                    Log.i("eugene", "data: ${document.data}")
+////                                    //TODO later move this to appropriate spot which is after running "algorithm"
+//                                    if (document.data!!["Matched"] != null) {
+//                                        manager.setMatchedUids(document.data!!["Matched"] as List<String>)
+//                                    }
+//                                    startActivity(Intent(this@SignUpActivity, SurveyActivity::class.java))
+//                                    finish()
+                                    val initAccessToken2 = AccessToken.getCurrentAccessToken()
+                                    if (initAccessToken2 != null && !initAccessToken2.isExpired) {
+                                        LoginManager.getInstance().logOut()
                                     }
-                                    startActivity(Intent(this@SignUpActivity, SurveyActivity::class.java))
+                                    Toast.makeText(this@SignUpActivity, "User already exists, please log in instead.", Toast.LENGTH_SHORT).show()
                                 } else {
                                     Log.i("eugene", "started the doc creation")
                                     addNewUserToFirestore(user)
-                                    startActivity(Intent(this@SignUpActivity, SurveyActivity::class.java))
+                                    startActivity(Intent(this@SignUpActivity, SignUpStartActivity::class.java))
+                                    finish()
                                 }
                             }
                             .addOnFailureListener { exception ->
@@ -134,16 +147,15 @@ class SignUpActivity : AppCompatActivity() {
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w("CreateAccountActivity", "signInWithCredential:failure", task.getException())
-                    Toast.makeText(this@SignUpActivity, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@SignUpActivity, "Authentication failed.", Toast.LENGTH_SHORT).show()
                 }
             }
     }
 
     private fun addNewUserToFirestore(user: FirebaseUser) {
         val userDetails = hashMapOf(
-            "FullName" to user.displayName,
-            "Email" to user.email
+                "FullName" to user.displayName,
+                "Email" to user.email
         )
         db.collection("Users").document(user.uid).set(userDetails)
             .addOnSuccessListener { Log.i("eugene", "New User Added to Firestore: DocumentSnapshot successfully written!") }
@@ -162,7 +174,14 @@ class SignUpActivity : AppCompatActivity() {
                         if (task.isSuccessful) {
                             var emailUser = firebaseAuth!!.currentUser!!
                             addNewUserToFirestore(emailUser)
-                            startActivity(Intent(this, SurveyActivity::class.java))
+                            user = firebaseAuth!!.currentUser!!
+                            user?.let {
+                                manager.setEmail(user.email.toString())
+                                manager.setFullName(user.displayName.toString())
+                                manager.setUid(user.uid)
+                            }
+                            startActivity(Intent(this, SignUpStartActivity::class.java))
+                            finish()
                         } else {
                             Toast.makeText(this@SignUpActivity, "failed to Authenticate !", Toast.LENGTH_SHORT).show()
                         }

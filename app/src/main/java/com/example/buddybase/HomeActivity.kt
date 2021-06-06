@@ -27,7 +27,6 @@ class HomeActivity : AppCompatActivity() {
                     R.id.nav_bar_liked -> navController.navigate(NavGraphHomeDirections.actionGlobalLikedFriendsFragment())
                     R.id.nav_bar_account -> navController.navigate(NavGraphHomeDirections.actionGlobalProfileFragment())
                     R.id.nav_bar_notification -> navController.navigate(NavGraphHomeDirections.actionGlobalNotificationsFragment())
-
                 }
                 true
             }
