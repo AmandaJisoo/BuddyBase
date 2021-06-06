@@ -21,7 +21,7 @@ class ColorBaseAdapter : BaseAdapter(){
     private val choices = choicesPerQuestion()
     private val firstQChoices = firstQChoices()
     lateinit var card: CardView
-    lateinit var oldCardo: CardView
+    var oldCardo: CardView? = null
 
     var curQuestion = firstQChoices
 
@@ -65,7 +65,7 @@ class ColorBaseAdapter : BaseAdapter(){
                         cardo.setCardBackgroundColor(Color.parseColor("#898F9C"))
                     } else {
                         itemsList.removeAt(0)
-                        oldCardo.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
+                        oldCardo?.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
                         itemsList.add(picked)
                         cardo.setCardBackgroundColor(Color.parseColor("#898F9C"))
                     }
