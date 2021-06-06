@@ -26,9 +26,14 @@ class LikedFriendsFragment : Fragment() {
             val friendManager = userApp.friendManager
             userManager = userApp.userManager
 
-            val adapter = LikedFriendsAdapter(friendManager.likedFriends, userManager.firebaseStorageReference)
-            rvLikedFriends.adapter = adapter
+            val adapter = LikedFriendsAdapter(friendManager.likedFriends, userManager.firebaseStorageReference, userApp)
 
+            adapter.onRemoveClickListener = { friend ->
+                friendManager.onLikedRemoveClick(friend)
+                adapter.notifyDataSetChanged()
+            }
+
+            rvLikedFriends.adapter = adapter
 
 
         }

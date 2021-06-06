@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.buddybase.R
+import com.example.buddybase.UserApplication
 import com.example.buddybase.databinding.ItemLikedFriendBinding
 import com.example.buddybase.manager.FriendManager
 import com.example.buddybase.model.UserInfo
@@ -17,9 +18,13 @@ private lateinit var friendManager: FriendManager
 private var matchedFriends: MutableList<UserInfo> = mutableListOf()
 
 class LikedFriendsAdapter(private val likedFriends: List<UserInfo>,
-                          private val storageRef: StorageReference?):
+                          private val storageRef: StorageReference?,
+                          private val application: UserApplication):
         RecyclerView.Adapter<LikedFriendsAdapter.LikedFriendViewHolder>() {
+
     private lateinit var ivProfilePic: ImageView
+
+    var onRemoveClickListener: (person: UserInfo) -> Unit = {_ ->}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikedFriendViewHolder {
         val binding = ItemLikedFriendBinding.inflate(LayoutInflater.from(parent.context))
@@ -51,7 +56,11 @@ class LikedFriendsAdapter(private val likedFriends: List<UserInfo>,
                 }
             }
 
-            // swipe to refresh
+            // remove button logic
+            friendManager = application.friendManager
+            btnRemove.setOnClickListener {
+                onRemoveClickListener(friendManager.likedFriends[position])
+            }
         }
     }
 
