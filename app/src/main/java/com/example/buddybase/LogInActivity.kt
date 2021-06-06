@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 
 class LogInActivity : AppCompatActivity() {
     var callbackManager: CallbackManager? = null
@@ -34,6 +37,8 @@ class LogInActivity : AppCompatActivity() {
     lateinit var btnSignIn: Button
     lateinit var etSignInEmail: EditText
     lateinit var etSignInPassword: EditText
+
+    lateinit var firebaseStorageReference: StorageReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,6 +71,9 @@ class LogInActivity : AppCompatActivity() {
         callbackManager = CallbackManager.Factory.create()
         facebookSignInButton = findViewById<View>(R.id.btnFacebookSignUp) as LoginButton
         facebookSignInButton.setReadPermissions("email")
+
+        firebaseStorageReference = Firebase.storage("gs://buddybase-efd0e.appspot.com/").reference
+        manager.setStorageRef(firebaseStorageReference)
 
         val initAccessToken = AccessToken.getCurrentAccessToken()
         if (initAccessToken != null && !initAccessToken.isExpired) {

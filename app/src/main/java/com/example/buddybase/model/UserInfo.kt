@@ -7,7 +7,7 @@ import com.google.firebase.firestore.DocumentReference
 data class UserInfo (
     val Email: String,
     val FullName: String,
-    var ImageProfilePic: String,
+    var ImageProfilePic: String?,
     var Matched: List<String>,
     var Q_FriendType: List<String>,
     val Q_Music: List<String>,

@@ -1,5 +1,7 @@
 package com.example.buddybase.manager
 
+import com.google.firebase.storage.StorageReference
+
 class UserManager {
     var email: String? = null
         private set
@@ -11,6 +13,13 @@ class UserManager {
         private set
     var matchedUsers: Map<String, Any>? = null
         private set
+
+    var firebaseStorageReference: StorageReference ?= null
+        private set
+
+    fun setStorageRef(firebaseStorageReference: StorageReference) {
+        this.firebaseStorageReference = firebaseStorageReference
+    }
 
     fun setEmail(email: String) {
         this.email = email

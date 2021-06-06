@@ -11,11 +11,13 @@ import com.example.buddybase.R
 import com.example.buddybase.databinding.ItemRecommendedFriendBinding
 import com.example.buddybase.model.UserInfo
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.StorageReference
 import com.google.gson.Gson
+import io.github.rosariopfernandes.firecoil.load
 import org.json.JSONObject
 
 //class RecommendedFriendsAdapter(private val listOfFriends: Map<String, Any>): RecyclerView.Adapter<RecommendedFriendsAdapter.FriendsViewHolder>() {
-class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo>): RecyclerView.Adapter<RecommendedFriendsAdapter.FriendsViewHolder>() {
+class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo>, private val storageRef: StorageReference?): RecyclerView.Adapter<RecommendedFriendsAdapter.FriendsViewHolder>() {
 
 //    private var matchedFriends: MutableList<UserInfo> = mutableListOf()
     // new
@@ -51,10 +53,26 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
             )
             // TODO: Parse ImageProfilePic as readable URI string
 //            Log.i("ImageProfilePic", friend.ImageProfilePic)
-//            val storageRef = FirebaseFirestore.getInstance()
+//            val storageRef = FirebaseFirestore.getInstance().reference
+
 //            val imageRef = storageRef.child(friend.ImageProfilePic)
 //            ivFriendProfilePic.load()
 //            ivFriendProfilePic.load()
+            val storageReference = storageRef
+            if (storageReference != null) {
+//                Log.i("imageRef", "${friend.ImageProfilePic}")
+//                Log.i("imageRef", "${storageReference.child(friend.ImageProfilePic)}")
+                val imgProfilePic = friend.ImageProfilePic
+                if (imgProfilePic != null) {
+                    val imageRef = storageReference.child(imgProfilePic)
+                    ivFriendProfilePic.load(imageRef)
+                }
+            }
+
+//            val imageRef = storageRef.child("users/me/profile.png")
+//
+//            imageView.load(imageRef)
+
 
             btnLike.setOnClickListener{
 //                btnLike.isClickable = false
