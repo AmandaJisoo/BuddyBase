@@ -23,12 +23,13 @@ class FriendManager {
         likedFriends.add(newLikedFriend)
 //        delay(5, TimeUnit.MILLISECONDS)
         this.recommendedFriends.remove(friend)
+
 //        Log.i("likedFriends", "added")
     }
 
 
-    fun loadRecommendedFriends(data: List<UserInfo>) {
-        this.recommendedFriends = data as MutableList<UserInfo>
+    fun loadRecommendedFriends(data: MutableList<UserInfo>) {
+        this.recommendedFriends = data
     }
 
     fun onRecommendRemoveClick(friend: UserInfo) {

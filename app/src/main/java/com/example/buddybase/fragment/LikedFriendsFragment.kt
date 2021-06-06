@@ -11,9 +11,10 @@ import com.example.buddybase.adapter.RecommendedFriendsAdapter
 import com.example.buddybase.databinding.FragmentLikedFriendsBinding
 import com.example.buddybase.databinding.FragmentRecommendedFriendsBinding
 import com.example.buddybase.manager.FriendManager
+import com.example.buddybase.manager.UserManager
 
 class LikedFriendsFragment : Fragment() {
-    private lateinit var friendManager: FriendManager
+    private lateinit var userManager: UserManager
     lateinit var userApp: UserApplication
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -21,13 +22,18 @@ class LikedFriendsFragment : Fragment() {
         val binding = FragmentLikedFriendsBinding.inflate(inflater)
         activity?.title = "Liked Friends"
         with(binding){
-            // TODO: fill liked friends
             userApp = activity?.applicationContext as UserApplication
             val friendManager = userApp.friendManager
+            userManager = userApp.userManager
 
-            val adapter = LikedFriendsAdapter(friendManager.likedFriends)
+            val adapter = LikedFriendsAdapter(friendManager.likedFriends, userManager.firebaseStorageReference)
             rvLikedFriends.adapter = adapter
+
+
+
         }
+
+
 
         return binding.root
     }

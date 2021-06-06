@@ -3,25 +3,32 @@ package com.example.buddybase.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.buddybase.FriendDiffCallback
 import com.example.buddybase.R
+import com.example.buddybase.UserApplication
 import com.example.buddybase.databinding.ItemRecommendedFriendBinding
+import com.example.buddybase.manager.FriendManager
+import com.example.buddybase.manager.UserManager
 import com.example.buddybase.model.UserInfo
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.StorageReference
-import com.google.gson.Gson
 import io.github.rosariopfernandes.firecoil.load
-import org.json.JSONObject
 
-//class RecommendedFriendsAdapter(private val listOfFriends: Map<String, Any>): RecyclerView.Adapter<RecommendedFriendsAdapter.FriendsViewHolder>() {
-class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo>, private val storageRef: StorageReference?): RecyclerView.Adapter<RecommendedFriendsAdapter.FriendsViewHolder>() {
+class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo>,
+                                private val storageRef: StorageReference?,
+                                private val application: UserApplication):
+        RecyclerView.Adapter<RecommendedFriendsAdapter.FriendsViewHolder>() {
 
-//    private var matchedFriends: MutableList<UserInfo> = mutableListOf()
-    // new
+//    private lateinit var manager: UserManager
+    private lateinit var friendManager: FriendManager
+
+    private lateinit var ivProfilePic: ImageView
+    private lateinit var friend: UserInfo
+
     var onLikeClickListener: (person: UserInfo) -> Unit = {_ ->}
     var onRemoveClickListener: (person: UserInfo) -> Unit = {_ ->}
 
@@ -31,38 +38,22 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
     }
 
     override fun onBindViewHolder(holder: FriendsViewHolder, position: Int) {
-//        for ((userName, value) in listOfFriends) {
-////            Log.i("matchesReference_path", "${ ((listOfFriends["Michelle Obama"] as Map<String, Any>)["ImageProfilePic"] as com.google.firebase.firestore.DocumentReference).path }")
-////            Log.i("matchesReference_list", "${ ((listOfFriends["Michelle Obama"] as Map<String, Any>)["ImageProfilePic"].toString()) }")
-//            val gson = Gson()
-//            val friendInfo = value as Map<String, Any>
-//            val userInfo = gson.fromJson(JSONObject(friendInfo).toString(), UserInfo::class.java)
-//            val profilePicRef = (friendInfo["ImageProfilePic"] as com.google.firebase.firestore.DocumentReference).path
-//            userInfo.ImageProfilePic = profilePicRef
-//            matchedFriends.add(userInfo)
-//        }
-//        Log.i("matchesReference", "$matchedFriends")
-
-        val friend = matchedFriends[position]
+        friend = matchedFriends[position]
         with(holder.binding) {
             tvFriendName.text = friend.FullName
             val friendType = friend.Q_FriendType.joinToString { it }
             tvFriendPersonality.text = root.context.getString(
                 R.string.recommended_friends_friend_type_format,
-                friend.FullName,
                 friendType
             )
-            // TODO: Parse ImageProfilePic as readable URI string
-//            Log.i("ImageProfilePic", friend.ImageProfilePic)
-//            val storageRef = FirebaseFirestore.getInstance().reference
 
-//            val imageRef = storageRef.child(friend.ImageProfilePic)
-//            ivFriendProfilePic.load()
-//            ivFriendProfilePic.load()
+            friendManager = application.friendManager
+
+            // load image
+            ivProfilePic = ivFriendProfilePic
+//            loadProfilePic()
             val storageReference = storageRef
             if (storageReference != null) {
-//                Log.i("imageRef", "${friend.ImageProfilePic}")
-//                Log.i("imageRef", "${storageReference.child(friend.ImageProfilePic)}")
                 val imgProfilePic = friend.ImageProfilePic
                 if (imgProfilePic != null) {
                     val imageRef = storageReference.child(imgProfilePic)
@@ -71,26 +62,45 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                         placeholder(R.mipmap.ic_avatar_placeholder_round)
                         transformations(CircleCropTransformation())
                     }
+                } else {
+                    ivFriendProfilePic.load(R.mipmap.ic_avatar_placeholder_round) {
+                        transformations(CircleCropTransformation())
+                    }
                 }
             }
 
-//            val imageRef = storageRef.child("users/me/profile.png")
-//
-//            imageView.load(imageRef)
 
+//            userApp = activity?.applicationContext as UserApplication
+//            userApp =
+//            friendManager = application.friendManager
+//            friendManager
 
             btnLike.setOnClickListener{
-//                btnLike.isClickable = false
-                onLikeClickListener(friend)
-                notifyDataSetChanged()
+                Log.i("Whatisgoingon4", "${position}")
+                Log.i("Whatisgoingon5", "${matchedFriends[position]}")
+                onLikeClickListener(friendManager.recommendedFriends[position])
             }
 
             btnRemove.setOnClickListener {
-                onRemoveClickListener(friend)
-                notifyDataSetChanged()
+                onRemoveClickListener(friendManager.recommendedFriends[position])
             }
         }
     }
+
+//    fun loadProfilePic() {
+//        val storageReference = storageRef
+//        if (storageReference != null) {
+//            val imgProfilePic = friend.ImageProfilePic
+//            if (imgProfilePic != null) {
+//                val imageRef = storageReference.child(imgProfilePic)
+//                ivProfilePic.load(imageRef) {
+//                    crossfade(true)
+//                    placeholder(R.mipmap.ic_avatar_placeholder_round)
+//                    transformations(CircleCropTransformation())
+//                }
+//            }
+//        }
+//    }
 
 //    fun updateFriends(newFriendList: MutableList<UserInfo>) {
 //        val callback = FriendDiffCallback(newFriendList, newFriendList)

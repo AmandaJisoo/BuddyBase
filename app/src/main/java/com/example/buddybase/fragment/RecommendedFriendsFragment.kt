@@ -30,15 +30,35 @@ class RecommendedFriendsFragment : Fragment() {
 
         userApp = activity?.applicationContext as UserApplication
         this.friendManager = userApp.friendManager
-
         manager = this.userApp.userManager
+        val mapOfMatches = manager.matchedUsers
+        val matches = mapOfMatches as Map<String, Any>
+        matchedFriends = mutableListOf()
 
-        loadRecommendedFriends(binding)
+        if (friendManager.recommendedFriends.size == 0 && friendManager.likedFriends.size == 0) {
+            for ((userName, value) in matches) {
+                val gson = Gson()
+                var friendInfo = value as MutableMap<String, Any>
+                val imgProfilePic = friendInfo["ImageProfilePic"]
+                if (imgProfilePic != null) {
+                    friendInfo["ImageProfilePic"] = (imgProfilePic as DocumentReference).path
+                }
+                val userInfo = gson.fromJson(JSONObject(friendInfo as Map<String, Any>).toString(), UserInfo::class.java)
+
+                if (imgProfilePic != null) {
+                    friendInfo["ImageProfilePic"] = imgProfilePic
+                }
+                matchedFriends.add(userInfo)
+            }
+            friendManager.loadRecommendedFriends(matchedFriends)
+        }
+        matchedFriends = friendManager.recommendedFriends
+
+        loadRecommendedFriends(matchedFriends, binding)
         with(binding) {
             // swipe to refresh
             srlRefreshFriendList.setOnRefreshListener {
-//                getMapOfMatchedUsers(matchedWith, binding)
-                loadRecommendedFriends(binding)
+                loadRecommendedFriends(matchedFriends, binding)
                 srlRefreshFriendList.isRefreshing = false
             }
         }
@@ -46,41 +66,40 @@ class RecommendedFriendsFragment : Fragment() {
         return binding.root
     }
 
-    private fun loadRecommendedFriends(binding: FragmentRecommendedFriendsBinding) {
-        val mapOfMatches = manager.matchedUsers
-        val matches = mapOfMatches as Map<String, Any>
-        matchedFriends = mutableListOf()
-        for ((userName, value) in matches) {
-            val gson = Gson()
-            var friendInfo = value as MutableMap<String, Any>
-            Log.i("StuffNotWorking", "${friendInfo}")
-            val imgProfilePic = friendInfo["ImageProfilePic"]
-            if (imgProfilePic != null) {
+    private fun loadRecommendedFriends(matches: MutableList<UserInfo>, binding: FragmentRecommendedFriendsBinding) {
+//        matchedFriends = friendManager.recommendedFriends
 
-                friendInfo["ImageProfilePic"] =  (imgProfilePic as DocumentReference).path
-            }
-
-            val userInfo = gson.fromJson(JSONObject(friendInfo as Map<String, Any>).toString(), UserInfo::class.java)
-
-            if (imgProfilePic != null) {
-                friendInfo["ImageProfilePic"] = imgProfilePic
-            }
-
-            matchedFriends.add(userInfo)
-        }
         friendManager.loadRecommendedFriends(matchedFriends)
-        val adapter = RecommendedFriendsAdapter(friendManager.recommendedFriends, manager.firebaseStorageReference)
+        val adapter = RecommendedFriendsAdapter(friendManager.recommendedFriends, manager.firebaseStorageReference, userApp)
         adapter.onLikeClickListener = { friend ->
+            Log.i("WhatisgoingonFrag1", "${friend}")
+            Log.i("WhatisgoingonFrag2", "${matchedFriends.indexOf(friend)}")
+            Log.i("WhatisgoingonFrag3", "${friendManager.recommendedFriends[2]}")
+//            Log.i("WhatisgoingonFrag", "${}")
+//            val originalIndex = matchedFriends.indexOf(friend)
 
             friendManager.onLikeClick(friend)
+//            matchedFriends = friendManager.recommendedFriends
+            adapter.notifyDataSetChanged()
+//            adapter.notifyItemRemoved(originalIndex)
+
+//            loadRecommendedFriends(matchedFriends,binding)
+//            adapter.loadProfilePic()
         }
         adapter.onRemoveClickListener = { friend ->
             friendManager.onRecommendRemoveClick(friend)
+            adapter.notifyDataSetChanged()
+//            loadRecommendedFriends(matchedFriends,binding)
         }
-//        adapter.
-//        manager.firebaseStorageReference
         binding.rvRecommendedFriends.adapter = adapter
     }
+}
+
+
+
+
+
+
 
 //    private fun getMapOfMatchedUsers(matched: List<String>, binding: FragmentRecommendedFriendsBinding): MutableMap<Any?, Any> {
 //        val docRef = db.collection("Users")
@@ -136,5 +155,5 @@ class RecommendedFriendsFragment : Fragment() {
 //        }
 //        return mapOfMatches
 //    }
-}
+
 
