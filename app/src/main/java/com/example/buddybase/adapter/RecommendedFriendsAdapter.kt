@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
+//import coil.load
 import com.example.buddybase.FriendDiffCallback
 import com.example.buddybase.R
 import com.example.buddybase.databinding.ItemRecommendedFriendBinding
