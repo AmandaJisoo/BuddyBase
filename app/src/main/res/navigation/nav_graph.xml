@@ -5,6 +5,8 @@
     android:id="@+id/nav_graph_home"
     app:startDestination="@id/recommendedFriendsFragment">
 
+
+
     <fragment
         android:id="@+id/recommendedFriendsFragment"
         android:name="com.example.buddybase.fragment.RecommendedFriendsFragment"
