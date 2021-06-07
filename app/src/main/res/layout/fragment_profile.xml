@@ -279,16 +279,6 @@
         android:inputType="text"
         />
 
-    <Button
-        android:id="@+id/btnTempPull"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvAttitude"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="temp pull"
-        />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabEditProfile"
         android:layout_width="wrap_content"

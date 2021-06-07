@@ -115,7 +115,8 @@ class LogInActivity : AppCompatActivity() {
                             manager.setEmail(user.email.toString())
                             manager.setFullName(user.displayName.toString())
                             manager.setUid(user.uid)
-                            Log.i("eugene", user.uid)
+                            Log.i("currentUser", "user.uid: ${user.uid}")
+                            manager.uid?.let { it1 -> Log.i("currentUser", "manager.uid: ${it1}") }
 
                             docRef = db.collection("Users").document(user.uid)
 
@@ -195,6 +196,9 @@ class LogInActivity : AppCompatActivity() {
                                                 manager.setEmail(user.email.toString())
                                                 manager.setFullName(user.displayName.toString())
                                                 manager.setUid(user.uid)
+                                                Log.i("currentUser", "user.uid: ${user.uid}")
+                                                manager.uid?.let { it1 -> Log.i("currentUser", "manager.uid: ${it1}") }
+
                                             }
                                             startActivity(Intent(this, SignUpStartActivity::class.java))
                                             finish()

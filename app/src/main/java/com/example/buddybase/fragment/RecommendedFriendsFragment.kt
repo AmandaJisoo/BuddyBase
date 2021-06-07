@@ -60,6 +60,7 @@ class RecommendedFriendsFragment : Fragment() {
 //            FirebaseStorage
             if (friendInfo["ImageProfilePic"] != null) {
                 friendInfo["ImageProfilePic"] =  (friendInfo["ImageProfilePic"] as DocumentReference).path
+                Log.i("currentUser", friendInfo["ImageProfilePic"].toString())
             }
 
 //            Log.i("fbsr", "${manager.firebaseStorageReference}")
