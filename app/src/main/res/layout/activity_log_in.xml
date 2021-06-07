@@ -98,11 +98,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/btnFacebookSignUp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/btnFacebookSignUp"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         >
 
         <TextView
@@ -110,8 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:text="@string/tvSignUpInstead"
-            android:textAlignment="center" />
+            android:text="@string/tvSignUpInstead" />
 
         <TextView
             android:id="@+id/tvSwitchToSignUp"
@@ -120,9 +120,7 @@
             android:layout_marginStart="5dp"
             android:text="Sign Up Now"
             android:textColor="@color/blue_buddybase"
-            android:textAlignment="center"
             app:layout_constraintStart_toEndOf="@+id/tvSignUpInstead"
-            android:gravity="center_horizontal"
             android:layout_marginLeft="10dp" />
 
     </LinearLayout>
