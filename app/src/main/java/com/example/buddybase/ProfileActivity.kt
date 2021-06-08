@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import coil.transform.CircleCropTransformation
 import com.example.buddybase.databinding.ActivityProfileBinding
 import com.example.buddybase.fragment.RecommendedFriendsFragment
 import com.example.buddybase.manager.FriendManager
@@ -78,6 +79,12 @@ class ProfileActivity : AppCompatActivity() {
 //                likedFriendsManager.onLikedRemoveClick(friend)
 //            }
 //        }
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
 
@@ -90,7 +97,11 @@ class ProfileActivity : AppCompatActivity() {
                     val profPic = friend.ImageProfilePic
                     if (profPic != null) {
                         val img = storageReference.child(profPic)
-                        ivVariableProfPic.load(img)
+                        ivProfPic.load(img) {
+                            crossfade(true)
+                            placeholder(R.mipmap.ic_avatar_placeholder_round)
+                            transformations(CircleCropTransformation())
+                        }
                     }
                 }
                 tvName.text = friend.FullName

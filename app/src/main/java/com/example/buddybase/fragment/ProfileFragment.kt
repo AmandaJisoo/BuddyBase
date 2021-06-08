@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.example.buddybase.R
 import com.example.buddybase.UserApplication
 import com.example.buddybase.databinding.ActivityProfileBinding
@@ -104,7 +105,11 @@ class ProfileFragment : Fragment() {
                                         val profPic = (personDataTemp["ImageProfilePic"] as DocumentReference).path
                                         if (profPic != null) {
                                             val img = storageReference.child(profPic)
-                                            ivVariableProfPic.load(img)
+                                            ivProfPic.load(img) {
+                                                crossfade(true)
+                                                placeholder(R.mipmap.ic_avatar_placeholder_round)
+                                                transformations(CircleCropTransformation())
+                                            }
                                         }
                                     }
                                 }

@@ -7,43 +7,52 @@
     tools:context=".ProfileActivity"
     android:padding="30dp">
 
-    <androidx.cardview.widget.CardView
+    <!--    <androidx.cardview.widget.CardView-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        android:id="@+id/ivProfPic"-->
+    <!--        android:layout_width="155dp"-->
+    <!--        android:layout_height="155dp"-->
+    <!--        app:cardCornerRadius="250dp"-->
+    <!--        app:cardBackgroundColor="@color/blue_buddybase"-->
+    <!--        android:layout_margin="70dp">-->
+
+    <!--        <androidx.cardview.widget.CardView-->
+    <!--            android:layout_width="150dp"-->
+    <!--            android:layout_height="150dp"-->
+    <!--            app:cardCornerRadius="250dp"-->
+    <!--            android:layout_gravity="center">-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/ivVariableProfPic"-->
+    <!--                android:layout_width="150dp"-->
+    <!--                android:layout_height="150dp"-->
+    <!--                android:src="@drawable/default_prof_pic"-->
+    <!--                android:scaleType="centerCrop"/>-->
+
+    <!--        </androidx.cardview.widget.CardView>-->
+
+    <!--    </androidx.cardview.widget.CardView>-->
+    <ImageView
+        android:id="@+id/ivProfPic"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/ivProfPic"
-        android:layout_width="155dp"
-        android:layout_height="155dp"
-        app:cardCornerRadius="250dp"
-        app:cardBackgroundColor="@color/blue_buddybase"
-        android:layout_margin="70dp">
+        app:layout_constraintBottom_toTopOf="@id/tvName"/>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="250dp"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/ivVariableProfPic"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/default_prof_pic"
-                android:scaleType="centerCrop"/>
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.cardview.widget.CardView>
-
-<!--    <ImageView-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:src="@drawable/profile_circle"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintRight_toRightOf="@id/ivProfPic"-->
-<!--        />-->
+    <!--    <ImageView-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:src="@drawable/profile_circle"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintRight_toRightOf="@id/ivProfPic"-->
+    <!--        />-->
 
     <TextView
         android:id="@+id/tvName"
@@ -53,252 +62,265 @@
         app:layout_constraintTop_toBottomOf="@+id/ivProfPic"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/clAbout"
+        android:textSize="24sp"
         android:layout_margin="10dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         />
 
-    <View
-        android:id="@+id/vSeparator"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
+    <!--    <View-->
+    <!--        android:id="@+id/vSeparator"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/tvName"-->
+    <!--        app:layout_constraintLeft_toLeftOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        android:background="#e5e5e5"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_marginTop="20dp"-->
+    <!--        android:layout_height="0.5dp"-->
+    <!--        />-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="#e5e5e5"
-        android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="0.5dp"
-        />
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <TextView
-        android:id="@+id/tvAbout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="About"
-        app:layout_constraintTop_toBottomOf="@+id/vSeparator"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="20dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        />
+        <TextView
+            android:id="@+id/tvAbout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
 
 
-    <TextView
-        android:id="@+id/tvAnimalPreference"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvAbout"
-        android:text="Enjoys the company of "
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        />
-    <TextView
-        android:id="@+id/tvVariableAnimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/tvAnimalPreference"
-        app:layout_constraintTop_toTopOf="@+id/tvAnimalPreference"
-        app:layout_constraintBottom_toBottomOf="@id/tvAnimalPreference"
-        android:text="test"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        />
-    <EditText
-        android:id="@+id/etAnimalPreference"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tvAnimalPreference"
-        app:layout_constraintBottom_toBottomOf="@id/tvAnimalPreference"
-        app:layout_constraintLeft_toLeftOf="@id/tvAnimalPreference"
-        app:layout_constraintRight_toRightOf="@id/tvVariableAnimal"
-        android:visibility="invisible"
-        android:inputType="text"
-        />
+        <TextView
+            android:id="@+id/tvAnimalPreference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvAbout"
+            android:text="Enjoys the company of "
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/tvVariableAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/tvAnimalPreference"
+            app:layout_constraintTop_toTopOf="@+id/tvAnimalPreference"
+            app:layout_constraintBottom_toBottomOf="@id/tvAnimalPreference"
+            android:text="test"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:id="@+id/etAnimalPreference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tvAnimalPreference"
+            app:layout_constraintBottom_toBottomOf="@id/tvAnimalPreference"
+            app:layout_constraintLeft_toLeftOf="@id/tvAnimalPreference"
+            app:layout_constraintRight_toRightOf="@id/tvVariableAnimal"
+            android:visibility="invisible"
+            android:inputType="text"
+            />
 
-    <TextView
-        android:id="@+id/tvMusicPreferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvAnimalPreference"
-        android:text="Likes "
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        />
-    <TextView
-        android:id="@+id/tvVariableMusic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/tvMusicPreferences"
-        app:layout_constraintTop_toTopOf="@+id/tvMusicPreferences"
-        app:layout_constraintBottom_toBottomOf="@id/tvMusicPreferences"
-        android:text="test"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        />
-    <EditText
-        android:id="@+id/etMusicPreferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tvMusicPreferences"
-        app:layout_constraintBottom_toBottomOf="@id/tvMusicPreferences"
-        app:layout_constraintLeft_toLeftOf="@id/tvMusicPreferences"
-        app:layout_constraintRight_toRightOf="@id/tvVariableMusic"
-        android:visibility="invisible"
-        android:inputType="text"
-        />
+        <TextView
+            android:id="@+id/tvMusicPreferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvAnimalPreference"
+            android:text="Likes "
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/tvVariableMusic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/tvMusicPreferences"
+            app:layout_constraintTop_toTopOf="@+id/tvMusicPreferences"
+            app:layout_constraintBottom_toBottomOf="@id/tvMusicPreferences"
+            android:text="test"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:id="@+id/etMusicPreferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tvMusicPreferences"
+            app:layout_constraintBottom_toBottomOf="@id/tvMusicPreferences"
+            app:layout_constraintLeft_toLeftOf="@id/tvMusicPreferences"
+            app:layout_constraintRight_toRightOf="@id/tvVariableMusic"
+            android:visibility="invisible"
+            android:inputType="text"
+            />
 
-    <TextView
-        android:id="@+id/tvShowPreferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvMusicPreferences"
-        android:text="Would watch "
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        />
-    <TextView
-        android:id="@+id/tvVariableShow"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/tvShowPreferences"
-        app:layout_constraintTop_toTopOf="@+id/tvShowPreferences"
-        app:layout_constraintBottom_toBottomOf="@id/tvShowPreferences"
-        android:text="test"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        />
-    <EditText
-        android:id="@+id/etShowPreferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tvShowPreferences"
-        app:layout_constraintBottom_toBottomOf="@id/tvShowPreferences"
-        app:layout_constraintLeft_toLeftOf="@id/tvShowPreferences"
-        app:layout_constraintRight_toRightOf="@id/tvVariableShow"
-        android:visibility="invisible"
-        android:inputType="text"
-        />
+        <TextView
+            android:id="@+id/tvShowPreferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvMusicPreferences"
+            android:text="Would watch "
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/tvVariableShow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/tvShowPreferences"
+            app:layout_constraintTop_toTopOf="@+id/tvShowPreferences"
+            app:layout_constraintBottom_toBottomOf="@id/tvShowPreferences"
+            android:text="test"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
+        <EditText
+            android:id="@+id/etShowPreferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tvShowPreferences"
+            app:layout_constraintBottom_toBottomOf="@id/tvShowPreferences"
+            app:layout_constraintLeft_toLeftOf="@id/tvShowPreferences"
+            app:layout_constraintRight_toRightOf="@id/tvVariableShow"
+            android:visibility="invisible"
+            android:inputType="text"
+            />
 
-    <TextView
-        android:id="@+id/tvPersonalityType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvShowPreferences"
-        android:text="Slightly Extroverted"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:layout_marginTop="10dp"
-        />
-    <EditText
-        android:id="@+id/etPersonalityType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tvPersonalityType"
-        app:layout_constraintBottom_toBottomOf="@id/tvPersonalityType"
-        app:layout_constraintLeft_toLeftOf="@id/tvPersonalityType"
-        app:layout_constraintRight_toRightOf="@id/tvPersonalityType"
-        android:visibility="invisible"
-        android:inputType="text"
-        />
+        <TextView
+            android:id="@+id/tvPersonalityType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvShowPreferences"
+            android:text="Slightly Extroverted"
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            />
+        <EditText
+            android:id="@+id/etPersonalityType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tvPersonalityType"
+            app:layout_constraintBottom_toBottomOf="@id/tvPersonalityType"
+            app:layout_constraintLeft_toLeftOf="@id/tvPersonalityType"
+            app:layout_constraintRight_toRightOf="@id/tvPersonalityType"
+            android:visibility="invisible"
+            android:inputType="text"
+            />
 
-    <TextView
-        android:id="@+id/tvFoodPreferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvPersonalityType"
-        android:text="Feels like eating something "
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        />
-    <TextView
-        android:id="@+id/tvVariableFood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/tvFoodPreferences"
-        app:layout_constraintTop_toTopOf="@+id/tvFoodPreferences"
-        app:layout_constraintBottom_toBottomOf="@id/tvFoodPreferences"
-        android:text="test"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        <TextView
+            android:id="@+id/tvFoodPreferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvPersonalityType"
+            android:text="Feels like eating something "
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/tvVariableFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/tvFoodPreferences"
+            app:layout_constraintTop_toTopOf="@+id/tvFoodPreferences"
+            app:layout_constraintBottom_toBottomOf="@id/tvFoodPreferences"
+            android:text="test"
+            android:textStyle="bold"
+            android:textColor="@color/black"
 
-        />
-    <EditText
-        android:id="@+id/etFoodPreferences"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tvFoodPreferences"
-        app:layout_constraintBottom_toBottomOf="@id/tvFoodPreferences"
-        app:layout_constraintLeft_toLeftOf="@id/tvFoodPreferences"
-        app:layout_constraintRight_toRightOf="@id/tvVariableFood"
-        android:visibility="invisible"
-        android:inputType="text"
-        />
+            />
+        <EditText
+            android:id="@+id/etFoodPreferences"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/tvFoodPreferences"
+            app:layout_constraintBottom_toBottomOf="@id/tvFoodPreferences"
+            app:layout_constraintLeft_toLeftOf="@id/tvFoodPreferences"
+            app:layout_constraintRight_toRightOf="@id/tvVariableFood"
+            android:visibility="invisible"
+            android:inputType="text"
+            />
 
-    <TextView
-        android:id="@+id/tvAttitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvFoodPreferences"
-        android:text="Looking for a friend who is "
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:textColor="@color/black"
-        android:layout_marginTop="10dp"
-        />
-    <TextView
-        android:id="@+id/tvVariableAttitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@id/tvAttitude"
-        app:layout_constraintTop_toTopOf="@+id/tvAttitude"
-        app:layout_constraintBottom_toBottomOf="@id/tvAttitude"
-        android:text="test"
-        android:textStyle="bold"
-        android:textColor="@color/black"
+        <TextView
+            android:id="@+id/tvAttitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvFoodPreferences"
+            android:text="Looking for a friend who is "
+            android:layout_marginLeft="30dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/tvVariableAttitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toRightOf="@id/tvAttitude"
+            app:layout_constraintTop_toTopOf="@+id/tvAttitude"
+            app:layout_constraintBottom_toBottomOf="@id/tvAttitude"
+            android:text="test"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            />
 
-        />
-    <EditText
-        android:id="@+id/etAttitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tvAttitude"
-        app:layout_constraintBottom_toBottomOf="@id/tvAttitude"
-        app:layout_constraintLeft_toLeftOf="@id/tvAttitude"
-        app:layout_constraintRight_toRightOf="@id/tvVariableAttitude"
-        android:visibility="invisible"
-        android:inputType="text"
-        />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        app:backgroundTint="@color/blue_buddybase"-->
-<!--        android:id="@+id/fabLikeBtn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/fabDislikeBtn"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        android:src="@drawable/ic_thumb_selector"-->
-<!--        app:tint="@color/white"-->
-<!--        />-->
+    <!--    <EditText-->
+    <!--        android:id="@+id/etAttitude"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintTop_toTopOf="@id/tvAttitude"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/tvAttitude"-->
+    <!--        app:layout_constraintLeft_toLeftOf="@id/tvAttitude"-->
+    <!--        app:layout_constraintRight_toRightOf="@id/tvVariableAttitude"-->
+    <!--        android:visibility="invisible"-->
+    <!--        android:inputType="text"-->
+    <!--        />-->
 
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fabDislikeBtn"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        android:src="@drawable/ic_baseline_thumb_down_24"-->
-<!--        />-->
+    <!--    <Button-->
+    <!--        android:id="@+id/btnSubmitChanges"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintTop_toTopOf="@id/fabEditProfile"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@id/fabEditProfile"-->
+    <!--        app:layout_constraintLeft_toLeftOf="@id/tvName"-->
+    <!--        app:layout_constraintRight_toRightOf="@id/tvName"-->
+    <!--        android:text="submit"-->
+    <!--        android:visibility="invisible"-->
+    <!--        />-->
 
 
+    <!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+    <!--        android:id="@+id/fabEditProfile"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="10dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintRight_toRightOf="parent"-->
+    <!--        android:src="@drawable/ic_baseline_edit_24"-->
+    <!--        />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

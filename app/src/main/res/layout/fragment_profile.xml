@@ -4,47 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileActivity"
-    android:padding="30dp">
+    tools:context=".ProfileActivity">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:backgroundDimEnabled="false"
+        android:clipChildren="false"
+        android:elevation="0dp"
+        android:translationZ="0dp"
+        android:outlineAmbientShadowColor="@color/white"
+        android:outlineSpotShadowColor="@color/white"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:background="@color/white"
+            android:backgroundDimEnabled="false"
+            android:clipChildren="false"
+            android:elevation="0dp"
+            android:translationZ="0dp"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Your Profile"
+                android:textStyle="bold"
+                android:textColor="@color/blue_buddybase"
+                android:textSize="30dp"
+                />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/ivProfPic"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/ivProfPic"
-        android:layout_width="155dp"
-        android:layout_height="155dp"
-        app:cardCornerRadius="250dp"
-        app:cardBackgroundColor="@color/blue_buddybase"
-        android:layout_margin="70dp">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            app:cardCornerRadius="250dp"
-            android:layout_gravity="center">
-
-            <ImageView
-                android:id="@+id/ivVariableProfPic"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/default_prof_pic"
-                android:scaleType="centerCrop"/>
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.cardview.widget.CardView>
-
-    <!--    <ImageView-->
-    <!--        android:layout_width="100dp"-->
-    <!--        android:layout_height="100dp"-->
-    <!--        android:src="@drawable/profile_circle"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/ivProfPic"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"-->
-    <!--        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"-->
-    <!--        app:layout_constraintRight_toRightOf="@id/ivProfPic"-->
-    <!--        />-->
-
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintBottom_toTopOf="@id/tvName"/>
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
@@ -53,36 +61,31 @@
         app:layout_constraintTop_toBottomOf="@+id/ivProfPic"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/clAbout"
+        android:textSize="24sp"
         android:layout_margin="10dp"
         android:textColor="@color/black"
         android:textStyle="bold"
         />
-
-    <View
-        android:id="@+id/vSeparator"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvName"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="#e5e5e5"
-        android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="0.5dp"
-        />
+        app:layout_constraintBottom_toBottomOf="parent">
 
     <TextView
         android:id="@+id/tvAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="About"
-        app:layout_constraintTop_toBottomOf="@+id/vSeparator"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="20dp"
         android:textStyle="bold"
         android:textColor="@color/black"
         />
-
-
     <TextView
         android:id="@+id/tvAnimalPreference"
         android:layout_width="wrap_content"
@@ -116,7 +119,6 @@
         android:visibility="invisible"
         android:inputType="text"
         />
-
     <TextView
         android:id="@+id/tvMusicPreferences"
         android:layout_width="wrap_content"
@@ -150,7 +152,6 @@
         android:visibility="invisible"
         android:inputType="text"
         />
-
     <TextView
         android:id="@+id/tvShowPreferences"
         android:layout_width="wrap_content"
@@ -184,7 +185,6 @@
         android:visibility="invisible"
         android:inputType="text"
         />
-
     <TextView
         android:id="@+id/tvPersonalityType"
         android:layout_width="wrap_content"
@@ -230,7 +230,6 @@
         android:text="test"
         android:textStyle="bold"
         android:textColor="@color/black"
-
         />
     <EditText
         android:id="@+id/etFoodPreferences"
@@ -243,7 +242,6 @@
         android:visibility="invisible"
         android:inputType="text"
         />
-
     <TextView
         android:id="@+id/tvAttitude"
         android:layout_width="wrap_content"
@@ -265,41 +263,7 @@
         android:text="test"
         android:textStyle="bold"
         android:textColor="@color/black"
-
-        />
-    <EditText
-        android:id="@+id/etAttitude"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/tvAttitude"
-        app:layout_constraintBottom_toBottomOf="@id/tvAttitude"
-        app:layout_constraintLeft_toLeftOf="@id/tvAttitude"
-        app:layout_constraintRight_toRightOf="@id/tvVariableAttitude"
-        android:visibility="invisible"
-        android:inputType="text"
         />
 
-<!--    <Button-->
-<!--        android:id="@+id/btnSubmitChanges"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintTop_toTopOf="@id/fabEditProfile"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/fabEditProfile"-->
-<!--        app:layout_constraintLeft_toLeftOf="@id/tvName"-->
-<!--        app:layout_constraintRight_toRightOf="@id/tvName"-->
-<!--        android:text="submit"-->
-<!--        android:visibility="invisible"-->
-<!--        />-->
-
-
-<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--        android:id="@+id/fabEditProfile"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="10dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintRight_toRightOf="parent"-->
-<!--        android:src="@drawable/ic_baseline_edit_24"-->
-<!--        />-->
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
