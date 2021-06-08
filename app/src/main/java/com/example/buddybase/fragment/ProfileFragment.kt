@@ -109,7 +109,7 @@ class ProfileFragment : Fragment() {
                                 tvName.text = "${personDataTemp["FullName"]}"
                                 tvVariableAnimal.text = "${personDataTemp["Q_Pet"]}"
                                 tvVariableMusic.text = "${personDataTemp["Q_Music"].toString().drop(1).dropLast(1)}"
-                                tvVariableShow.text = "Would watch ${personDataTemp["Q_Show"]}"
+                                tvVariableShow.text = "${personDataTemp["Q_Show"]}"
                                 tvPersonalityType.text = "${personDataTemp["Q_Personality"].toString().drop(1).dropLast(1)}"
                                 tvVariableFood.text = "${personDataTemp["Q_Taste"]}"
                                 tvVariableAttitude.text = "${personDataTemp["Q_FriendType"].toString().drop(1).dropLast(1)}"

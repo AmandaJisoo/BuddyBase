@@ -22,6 +22,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
 import org.json.JSONObject
+import kotlin.reflect.typeOf
 
 class RecommendedFriendsFragment : Fragment() {
     private lateinit var db: FirebaseFirestore
@@ -65,7 +66,7 @@ class RecommendedFriendsFragment : Fragment() {
             val gson = Gson()
             var friendInfo = value as MutableMap<String, Any>
 //            FirebaseStorage
-            if (friendInfo["ImageProfilePic"] != null) {
+            if (friendInfo["ImageProfilePic"] != null && friendInfo["ImageProfilePic"] !is String) {
                 friendInfo["ImageProfilePic"] =  (friendInfo["ImageProfilePic"] as DocumentReference).path
                 Log.i("currentUser", friendInfo["ImageProfilePic"].toString())
             }
