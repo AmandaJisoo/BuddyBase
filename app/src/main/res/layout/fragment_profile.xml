@@ -35,15 +35,15 @@
 
     </androidx.cardview.widget.CardView>
 
-<!--    <ImageView-->
-<!--        android:layout_width="100dp"-->
-<!--        android:layout_height="100dp"-->
-<!--        android:src="@drawable/profile_circle"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"-->
-<!--        app:layout_constraintRight_toRightOf="@id/ivProfPic"-->
-<!--        />-->
+    <!--    <ImageView-->
+    <!--        android:layout_width="100dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:src="@drawable/profile_circle"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintLeft_toLeftOf="@+id/ivProfPic"-->
+    <!--        app:layout_constraintRight_toRightOf="@id/ivProfPic"-->
+    <!--        />-->
 
     <TextView
         android:id="@+id/tvName"
@@ -279,26 +279,26 @@
         android:inputType="text"
         />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        app:backgroundTint="@color/blue_buddybase"
-        android:id="@+id/fabLikeBtn"
+    <Button
+        android:id="@+id/btnSubmitChanges"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/fabDislikeBtn"
-        app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_thumb_selector"
-        app:tint="@color/white"
+        app:layout_constraintTop_toTopOf="@id/fabEditProfile"
+        app:layout_constraintBottom_toBottomOf="@id/fabEditProfile"
+        app:layout_constraintLeft_toLeftOf="@id/tvName"
+        app:layout_constraintRight_toRightOf="@id/tvName"
+        android:text="submit"
+        android:visibility="invisible"
         />
 
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabDislikeBtn"
+        android:id="@+id/fabEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_baseline_thumb_down_24"
+        android:src="@drawable/ic_baseline_edit_24"
         />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
