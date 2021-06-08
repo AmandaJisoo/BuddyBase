@@ -121,11 +121,23 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 }
 
                 sendNotification(notification)
+                Toast.makeText(
+                    applicationContext,
+                    "You have liked ${friendManager.recommendedFriends[position].FullName}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 onLikeClickListener(friendManager.recommendedFriends[position])
             }
 
             btnRemove.setOnClickListener {
                 Log.i("yuh", "removing from list")
+                Toast.makeText(
+                    applicationContext,
+                    "You have removed ${friendManager.recommendedFriends[position].FullName}",
+                    Toast.LENGTH_SHORT
+                ).show()
+
                 onRemoveClickListener(friendManager.recommendedFriends[position])
             }
 

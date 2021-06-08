@@ -86,9 +86,9 @@ class HomeActivity : AppCompatActivity() {
 //    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-
-        }
+//        when(item.itemId) {
+//
+//        }
 
         return super.onOptionsItemSelected(item)
     }

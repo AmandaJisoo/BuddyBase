@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.buddybase.databinding.ActivityProfileBinding
@@ -56,15 +57,27 @@ class ProfileActivity : AppCompatActivity() {
         friend = intent.extras?.getParcelable<UserInfo>(UID_KEY)!!
 
         loadData(binding, friend)
-        with(binding) {
-            fabLikeBtn.setOnClickListener {
-                likedFriendsManager.onLikeClick(friend)
-            }
-
-            fabDislikeBtn.setOnClickListener {
-                likedFriendsManager.onLikedRemoveClick(friend)
-            }
-        }
+//        with(binding) {
+//            fabLikeBtn.setOnClickListener {
+//                Toast.makeText(
+//                    applicationContext,
+//                    "You have liked ${friend.FullName}",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//
+//                likedFriendsManager.onLikeClick(friend)
+//            }
+//
+//            fabDislikeBtn.setOnClickListener {
+//                Toast.makeText(
+//                    applicationContext,
+//                    "You have removed ${friend.FullName}",
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//
+//                likedFriendsManager.onLikedRemoveClick(friend)
+//            }
+//        }
     }
 
 

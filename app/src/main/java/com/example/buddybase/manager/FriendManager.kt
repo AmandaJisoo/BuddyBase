@@ -42,6 +42,7 @@ class FriendManager {
     }
 
     fun onLikedRemoveClick(friend: UserInfo) {
+        this.recommendedFriends.remove(friend)
         this.likedFriends.remove(friend)
     }
 }
