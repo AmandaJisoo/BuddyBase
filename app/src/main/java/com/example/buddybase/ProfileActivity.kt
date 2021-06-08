@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.buddybase.databinding.ActivityProfileBinding
 import com.example.buddybase.fragment.RecommendedFriendsFragment
+import com.example.buddybase.manager.FriendManager
 import com.example.buddybase.manager.UserManager
 import com.example.buddybase.model.UserInfo
 import com.google.firebase.auth.FirebaseAuth
@@ -37,6 +38,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
     lateinit var manager: UserManager
+    lateinit var likedFriendsManager: FriendManager
     lateinit var userApp: UserApplication
     private lateinit var auth: FirebaseAuth
     private lateinit var friend: UserInfo
@@ -49,12 +51,19 @@ class ProfileActivity : AppCompatActivity() {
         auth = Firebase.auth
         userApp = this.applicationContext as UserApplication
         this.manager = userApp.userManager
+        this.likedFriendsManager = userApp.friendManager
 
         friend = intent.extras?.getParcelable<UserInfo>(UID_KEY)!!
 
         loadData(binding, friend)
         with(binding) {
+            fabLikeBtn.setOnClickListener {
+                likedFriendsManager.onLikeClick(friend)
+            }
 
+            fabDislikeBtn.setOnClickListener {
+                likedFriendsManager.onLikedRemoveClick(friend)
+            }
         }
     }
 
