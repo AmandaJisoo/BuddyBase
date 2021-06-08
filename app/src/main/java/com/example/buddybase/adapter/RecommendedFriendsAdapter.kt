@@ -128,6 +128,10 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 Log.i("yuh", "removing from list")
                 onRemoveClickListener(friendManager.recommendedFriends[position])
             }
+
+            itemRoot.setOnClickListener {
+                onFriendClickListener(friend)
+            }
         }
     }
 
@@ -148,9 +152,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 return params
             }
 
-            itemRoot.setOnClickListener {
-                onFriendClickListener(friend)
-            }
+
         }
         requestQueue.add(jsonObjectRequest)
     }
