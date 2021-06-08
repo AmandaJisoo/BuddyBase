@@ -68,6 +68,9 @@ class LikedFriendsAdapter(private val likedFriends: List<UserInfo>,
             itemLikedRoot.setOnClickListener {
                 onFriendClickListener(friend)
             }
+            btnViewProfile.setOnClickListener {
+                onFriendClickListener(friend)
+            }
         }
     }
 
