@@ -4,11 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.buddybase.manager.UserManager
 import com.facebook.*
 import com.facebook.appevents.AppEventsLogger
@@ -39,7 +37,8 @@ class LogInActivity : AppCompatActivity() {
     lateinit var etSignInPassword: EditText
 
     lateinit var firebaseStorageReference: StorageReference
-
+    lateinit var llSpinner: LinearLayout
+    lateinit var clSpinnerBackground: ConstraintLayout
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,11 +49,15 @@ class LogInActivity : AppCompatActivity() {
         btnSignIn = findViewById<Button>(R.id.btnSignIn)
         etSignInEmail = findViewById<EditText>(R.id.etSignInEmail)
         etSignInPassword = findViewById<EditText>(R.id.etSignInPassword)
+        llSpinner = findViewById<LinearLayout>(R.id.llSpinner)
+        clSpinnerBackground = findViewById<ConstraintLayout>(R.id.clSpinnerBackground)
 
         var switchToSignUp = findViewById<TextView>(R.id.tvSwitchToSignUp)
 
         signInInputsArray = arrayOf(etSignInEmail, etSignInPassword)
         btnSignIn.setOnClickListener {
+            llSpinner.visibility = View.VISIBLE
+            clSpinnerBackground.visibility = View.VISIBLE
             signInUser()
         }
 
@@ -216,6 +219,8 @@ class LogInActivity : AppCompatActivity() {
                                     }
                         } else {
                             Toast.makeText(this@LogInActivity, "sign in failed", Toast.LENGTH_SHORT).show()
+                            llSpinner.visibility = View.INVISIBLE
+                            clSpinnerBackground.visibility = View.INVISIBLE
                         }
                     }
         } else {

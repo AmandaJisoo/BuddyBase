@@ -125,4 +125,45 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/llSpinner"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="15dp"
+        android:translationZ="50dp"
+        android:background="@drawable/btn_buddbase_white"
+        android:visibility="invisible"
+        >
+        <ProgressBar
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:indeterminate="true"
+            style="@style/Widget.AppCompat.ProgressBar"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Getting your buddies"
+            android:textColor="@color/blue_buddybase"
+            android:textStyle="bold"
+            android:layout_margin="10dp"
+            />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clSpinnerBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/blue_buddybase"
+        android:translationZ="5dp"
+        android:visibility="invisible"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
