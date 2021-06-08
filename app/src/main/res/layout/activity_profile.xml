@@ -286,7 +286,8 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/fabDislikeBtn"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_thumb"
+        android:src="@drawable/ic_thumb_selector"
+        app:tint="@color/white"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -295,7 +296,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/ic_baseline_edit_24"
+        android:src="@drawable/ic_baseline_thumb_down_24"
         />
 
 
