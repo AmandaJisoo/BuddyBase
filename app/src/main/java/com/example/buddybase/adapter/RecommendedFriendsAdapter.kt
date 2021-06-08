@@ -40,6 +40,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
 
 //    private lateinit var manager: UserManager
     private lateinit var friendManager: FriendManager
+    private lateinit var userManager: UserManager
 
     private lateinit var ivProfilePic: ImageView
     private lateinit var friend: UserInfo
@@ -69,6 +70,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
             )
 
             friendManager = application.friendManager
+            userManager = application.userManager
 
             // load image
             ivProfilePic = ivFriendProfilePic
@@ -99,7 +101,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
             btnLike.setOnClickListener{
                 Log.i("Whatisgoingon4", "${position}")
                 Log.i("Whatisgoingon5", "${matchedFriends[position]}")
-//                onLikeClickListener(friendManager.recommendedFriends[position])
+                onLikeClickListener(friendManager.recommendedFriends[position])
 
                 Log.i("godsuya2", "${matchedFriends[position].uid}")
 
@@ -110,7 +112,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
 
                 try {
                     notifcationBody.put("title", "Firebase Notification")
-                    notifcationBody.put("message", "yoyoyo")
+                    notifcationBody.put("message", "${userManager.fullName} wants to be your friend!")
                     notification.put("to", topic)
                     notification.put("data", notifcationBody)
                     Log.e("TAG", "try")
@@ -119,9 +121,6 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 }
 
                 sendNotification(notification)
-
-
-
             }
 
             btnRemove.setOnClickListener {

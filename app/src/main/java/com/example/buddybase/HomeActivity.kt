@@ -47,6 +47,14 @@ class HomeActivity : AppCompatActivity() {
                 true
             }
         }
+
+        Log.i("godsuya", "${manager.matchedUids}")
+        for (uid in manager.matchedUids!!) {
+            Log.i("godsuya", "$uid")
+            Firebase.messaging.unsubscribeFromTopic("/topics/$uid")
+        }
+
+
         Firebase.messaging.subscribeToTopic("/topics/${manager.uid}")
             .addOnCompleteListener { task ->
                 var msg = getString(R.string.msg_subscribed)
