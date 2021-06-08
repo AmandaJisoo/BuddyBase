@@ -166,7 +166,6 @@ class LogInActivity : AppCompatActivity() {
                     .addOnCompleteListener { signIn ->
                         if (signIn.isSuccessful) {
 
-                            //TODO: change to "home" activity
                             user = firebaseAuth!!.currentUser!!
                             docRef = db.collection("Users").document(user.uid)
                             docRef.get()
@@ -177,6 +176,7 @@ class LogInActivity : AppCompatActivity() {
                                                 manager.setEmail(user.email.toString())
                                                 manager.setFullName(user.displayName.toString())
                                                 manager.setUid(user.uid)
+                                                Log.i("ahoy", "${user.displayName.toString()}")
                                             }
                                             val docRef1 = db.collection("Users")
                                             val matchedMap = mutableMapOf<String, Any>()

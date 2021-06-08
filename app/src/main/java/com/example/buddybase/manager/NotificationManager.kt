@@ -13,14 +13,18 @@ class NotificationManager {
         private set
 
     private lateinit var newNotification: NotificationInfo
-    var notificationList = mutableListOf<NotificationInfo>()
-        private set
 
     fun setNewNotification(user: UserInfo, action: String, description: String) {
         this.user = user
         this.action = action
         this.description = description
     }
+
+
+
+
+    var notificationList = mutableListOf<NotificationInfo>()
+        private set
 
     fun addNewNotification(notification: NotificationInfo) {
         newNotification = notification

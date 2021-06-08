@@ -4,6 +4,7 @@ package com.example.buddybase.model
 data class NotificationInfo (
     val User: UserInfo,
     val Action: String,
-    val Description: String
+    val Description: String,
+    var ImageProfilePic: String?
 //    val Time: ...time ago, not sure if we want it
 )
