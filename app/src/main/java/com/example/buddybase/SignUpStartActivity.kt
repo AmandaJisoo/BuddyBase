@@ -33,6 +33,7 @@ class SignUpStartActivity: AppCompatActivity() {
             btnStartSurvey.setOnClickListener {
                 val email = etEmail.text.toString()
                 val name = etFullName.text.toString()
+                manager.setFullName(name)
                 val userDetails = hashMapOf<String, Any>()
                 userDetails["Email"] = email
                 userDetails["FullName"] = name
