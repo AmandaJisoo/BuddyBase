@@ -23,26 +23,13 @@ class NotificationsFragment : Fragment() {
         val binding = FragmentNotificationsBinding.inflate(inflater)
         activity?.title = "Notifications"
 
-        val bundle = savedInstanceState
-        var s:String? = null
-        s = bundle!!.getString("NOTIFICATION", "Default")
-        Log.i("ahoy", "$s")
-
-
-//        if (intent.getParcelableExtra<com.ericchee.songdataprovider.Song>(SONG_INFO_KEY) != null) {
-//            songNotification = intent.getParcelableExtra<com.ericchee.songdataprovider.Song>(SONG_INFO_KEY)!!
-//            binding.tvTitle.text = songNotification.title
-//            binding.tvArtist.text = songNotification.artist
-//            binding.imgCover.load(songNotification.largeImageID)
-//        }
-
         with(binding) {
             userApp = activity?.applicationContext as UserApplication
             val notificationManager = userApp.notificationManager
             userManager = userApp.userManager
 
 
-            val adapter = NotificationsAdapter(notificationManager.notificationList, userManager.firebaseStorageReference)
+            val adapter = notificationManager.uid?.let { NotificationsAdapter(notificationManager.notificationList, it, userManager.firebaseStorageReference) }
             rvNotifications.adapter = adapter
         }
         return binding.root

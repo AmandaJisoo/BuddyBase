@@ -12,7 +12,9 @@ class NotificationManager {
     var description: String? = null
         private set
 
-    private lateinit var newNotification: NotificationInfo
+    var uid: String? = null
+
+//    var newNotification: NotificationInfo? = null
 
     fun setNewNotification(user: UserInfo, action: String, description: String) {
         this.user = user
@@ -23,12 +25,21 @@ class NotificationManager {
 
 
 
-    var notificationList = mutableListOf<NotificationInfo>()
+//    var notificationList = mutableListOf<NotificationInfo>()
+//        private set
+//
+//    fun addNewNotification(notification: NotificationInfo) {
+////        newNotification = notification
+//        notificationList.add(notification)
+//        Log.i("notificationList", "new notification added")
+//    }
+
+    var notificationList = mutableListOf<String>()
         private set
 
-    fun addNewNotification(notification: NotificationInfo) {
-        newNotification = notification
-        notificationList.add(newNotification)
+    fun addNewNotification(notification: String) {
+//        newNotification = notification
+        notificationList.add(notification)
         Log.i("notificationList", "new notification added")
     }
 }

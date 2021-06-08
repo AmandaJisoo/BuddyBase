@@ -10,7 +10,9 @@ import androidx.navigation.NavGraph
 import androidx.navigation.NavGraphNavigator
 import androidx.navigation.findNavController
 import com.example.buddybase.databinding.ActivityHomeBinding
+import com.example.buddybase.manager.NotificationManager
 import com.example.buddybase.manager.UserManager
+import com.example.buddybase.model.NotificationInfo
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.ktx.messaging
 
@@ -19,11 +21,27 @@ class HomeActivity : AppCompatActivity() {
     private val navController by lazy { findNavController(R.id.navHost) }
     private val userApp: UserApplication by lazy { application as UserApplication }
     private lateinit var manager: UserManager
+    private lateinit var notificationManager: NotificationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater).apply { setContentView(root) }
         this.manager = userApp.userManager
+        this.notificationManager = userApp.notificationManager
+
+        if (intent.getStringExtra("NOTIFICATION") != null && intent.getStringExtra("UID") != null) {
+            var notification = intent.getStringExtra("NOTIFICATION")!!
+            var likerUid = intent.getStringExtra("UID")!!
+
+//            var sendIt = mutableMapOf<String, Any>(
+//                    "Description" to notification,
+//                    "ImageProfilePic" to "null"
+//            ) as NotificationInfo
+
+//            notificationManager.addNewNotification(sendIt)
+            notificationManager.uid = likerUid
+            notificationManager.addNewNotification(notification)
+        }
 
         with(binding) {
             // Hide ActionBar

@@ -25,18 +25,8 @@
             android:id="@+id/tvNotificationAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Someone Name just added you on Facebook"
+            android:text="Someone wants to be friends"
             android:textSize="16sp"
-            android:textColor="@color/black"
-            />
-
-        <TextView
-            android:id="@+id/tvNotificationDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Visit his Facebook Profile Page"
-            android:layout_marginTop="5dp"
-            android:textSize="12sp"
             android:textColor="@color/black"
             />
     </LinearLayout>

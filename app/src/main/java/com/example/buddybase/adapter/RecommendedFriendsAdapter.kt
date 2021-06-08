@@ -112,7 +112,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 val notifcationBody = JSONObject()
 
                 try {
-                    notifcationBody.put("title", "Firebase Notification")
+                    notifcationBody.put("title", "${userManager.uid}")
                     notifcationBody.put("message", "${userManager.fullName} wants to be friends")
                     notification.put("to", topic)
                     notification.put("data", notifcationBody)
