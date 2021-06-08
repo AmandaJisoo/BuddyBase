@@ -14,6 +14,7 @@ import com.example.buddybase.manager.UserManager
 import com.example.buddybase.model.UserInfo
 import com.google.firebase.firestore.DocumentReference
 import com.google.gson.Gson
+import kotlinx.coroutines.awaitAll
 import org.json.JSONObject
 
 class RecommendedFriendsFragment : Fragment() {
@@ -22,6 +23,7 @@ class RecommendedFriendsFragment : Fragment() {
 
     private lateinit var friendManager: FriendManager
     private lateinit var matchedFriends: MutableList<UserInfo>
+//    private lateinit var currentUser: UserInfo
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -50,7 +52,7 @@ class RecommendedFriendsFragment : Fragment() {
                 }
                 matchedFriends.add(userInfo)
             }
-            friendManager.loadRecommendedFriends(matchedFriends)
+            friendManager.loadRecommendedFriends(matchedFriends, manager)
         }
         matchedFriends = friendManager.recommendedFriends
 
@@ -63,20 +65,23 @@ class RecommendedFriendsFragment : Fragment() {
             }
         }
 
+        Log.i("matchedCurrent?", "${matchedFriends}")
+
         return binding.root
     }
 
     private fun loadRecommendedFriends(matches: MutableList<UserInfo>, binding: FragmentRecommendedFriendsBinding) {
-//        matchedFriends = friendManager.recommendedFriends
 
-        friendManager.loadRecommendedFriends(matchedFriends)
+        userApp = activity?.applicationContext as UserApplication
+        this.friendManager = userApp.friendManager
+        manager = this.userApp.userManager
+
+        friendManager.loadRecommendedFriends(matchedFriends, manager)
         val adapter = RecommendedFriendsAdapter(friendManager.recommendedFriends, manager.firebaseStorageReference, userApp, userApp.applicationContext)
         adapter.onLikeClickListener = { friend ->
-            Log.i("WhatisgoingonFrag1", "${friend}")
-            Log.i("WhatisgoingonFrag2", "${matchedFriends.indexOf(friend)}")
-            Log.i("WhatisgoingonFrag3", "${friendManager.recommendedFriends[2]}")
-//            Log.i("WhatisgoingonFrag", "${}")
-//            val originalIndex = matchedFriends.indexOf(friend)
+//            Log.i("WhatisgoingonFrag1", "${friend}")
+//            Log.i("WhatisgoingonFrag2", "${matchedFriends.indexOf(friend)}")
+//            Log.i("WhatisgoingonFrag3", "${friendManager.recommendedFriends[2]}")
 
             friendManager.onLikeClick(friend)
 //            matchedFriends = friendManager.recommendedFriends
