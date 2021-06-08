@@ -130,7 +130,8 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
             }
 
             itemRoot.setOnClickListener {
-                onFriendClickListener(friend)
+//                onFriendClickListener(friend)
+                onFriendClickListener(friendManager.recommendedFriends[position])
             }
         }
     }
