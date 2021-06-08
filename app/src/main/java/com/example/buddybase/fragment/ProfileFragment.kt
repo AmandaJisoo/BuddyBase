@@ -100,10 +100,12 @@ class ProfileFragment : Fragment() {
 
                             with(binding) {
                                 if (storageReference != null) {
-                                    val profPic = (personDataTemp["ImageProfilePic"] as DocumentReference).path
-                                    if (profPic != null) {
-                                        val img = storageReference.child(profPic)
-                                        ivVariableProfPic.load(img)
+                                    if (personDataTemp["ImageProfilePic"] != null) {
+                                        val profPic = (personDataTemp["ImageProfilePic"] as DocumentReference).path
+                                        if (profPic != null) {
+                                            val img = storageReference.child(profPic)
+                                            ivVariableProfPic.load(img)
+                                        }
                                     }
                                 }
                                 tvName.text = "${personDataTemp["FullName"]}"

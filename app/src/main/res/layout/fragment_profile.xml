@@ -296,6 +296,7 @@
         android:id="@+id/fabEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/ic_baseline_edit_24"

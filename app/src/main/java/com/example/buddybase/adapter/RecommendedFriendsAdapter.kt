@@ -102,7 +102,6 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
             btnLike.setOnClickListener{
                 Log.i("Whatisgoingon4", "${position}")
                 Log.i("Whatisgoingon5", "${matchedFriends[position]}")
-//                onLikeClickListener(friendManager.recommendedFriends[position])
 
                 Log.i("godsuya2", "${matchedFriends[position].uid}")
 
@@ -122,6 +121,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 }
 
                 sendNotification(notification)
+                onLikeClickListener(friendManager.recommendedFriends[position])
             }
 
             btnRemove.setOnClickListener {
