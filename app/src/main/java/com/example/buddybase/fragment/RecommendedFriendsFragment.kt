@@ -100,7 +100,6 @@ class RecommendedFriendsFragment : Fragment() {
             } else {
                 Toast.makeText(activity as Context, "Please try again", Toast.LENGTH_SHORT).show()
             }
-
         }
 //        adapter.
 //        manager.firebaseStorageReference

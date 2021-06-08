@@ -11,6 +11,10 @@ private lateinit var friendManager: FriendManager
 private var matchedFriends: MutableList<UserInfo> = mutableListOf()
 
 class LikedFriendsAdapter(private val likedFriends: List<UserInfo>): RecyclerView.Adapter<LikedFriendsAdapter.LikedFriendViewHolder>() {
+
+
+    var onFriendClickListener: (person: UserInfo) -> Unit = {_ ->}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikedFriendViewHolder {
         val binding = ItemLikedFriendBinding.inflate(LayoutInflater.from(parent.context))
         return LikedFriendViewHolder(binding)
@@ -21,8 +25,14 @@ class LikedFriendsAdapter(private val likedFriends: List<UserInfo>): RecyclerVie
 
         with(holder.binding) {
             tvFriendName.text = friend.FullName
+
+            itemLikedRoot.setOnClickListener {
+                onFriendClickListener(friend)
+            }
         }
     }
+
+
 
     override fun getItemCount(): Int = likedFriends.size
 
