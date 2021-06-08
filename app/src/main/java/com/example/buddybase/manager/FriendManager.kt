@@ -10,34 +10,34 @@ import java.util.concurrent.TimeUnit
 
 class FriendManager {
     private lateinit var newLikedFriend: UserInfo
+
     var recommendedFriends = mutableListOf<UserInfo>()
         private set
-//    private lateinit var likedFriends: List<UserInfo>
 
-//    var likedFriends = mutableListOf<UserInfo>()
     var likedFriends = mutableListOf<UserInfo>()
         private set
 
     fun onLikeClick(friend: UserInfo) {
         newLikedFriend = friend
         likedFriends.add(newLikedFriend)
-//        delay(5, TimeUnit.MILLISECONDS)
         this.recommendedFriends.remove(friend)
-
-//        Log.i("likedFriends", "added")
     }
 
 
-    fun loadRecommendedFriends(data: MutableList<UserInfo>) {
+    fun loadRecommendedFriends(data: MutableList<UserInfo>, userManager: UserManager) {
         this.recommendedFriends = data
+        // remove current user from list
+        val itr = recommendedFriends.toList().iterator()
+        while (itr.hasNext()) {
+            val matchedFriend = itr.next()
+            if(matchedFriend.uid == userManager.uid) {
+                recommendedFriends.remove(matchedFriend)
+            }
+        }
     }
 
     fun onRecommendRemoveClick(friend: UserInfo) {
         this.recommendedFriends.remove(friend)
-//        val callback = FriendDiffCallback(oldFriendList, recommendedFriends)
-//        val result = DiffUtil.calculateDiff(callback)
-//        result.dispatchUpdatesTo()
-//        val oldFriendList = this.recommendedFriends
     }
 
     fun onLikedRemoveClick(friend: UserInfo) {
