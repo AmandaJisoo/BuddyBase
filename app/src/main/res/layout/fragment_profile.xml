@@ -279,6 +279,19 @@
         android:inputType="text"
         />
 
+    <Button
+        android:id="@+id/btnSubmitChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/fabEditProfile"
+        app:layout_constraintBottom_toBottomOf="@id/fabEditProfile"
+        app:layout_constraintLeft_toLeftOf="@id/tvName"
+        app:layout_constraintRight_toRightOf="@id/tvName"
+        android:text="submit"
+        android:visibility="invisible"
+        />
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabEditProfile"
         android:layout_width="wrap_content"

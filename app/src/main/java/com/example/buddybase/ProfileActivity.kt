@@ -1,5 +1,7 @@
 package com.example.buddybase
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -21,6 +23,17 @@ import java.io.IOException
 //private const val TEST_DATA = "5uuWVzvVphYMEX8XMy5d"
 //private const val STORAGE_URL = "gs://buddybase-efd0e.appspot.com/user_profile_pics"
 
+private const val UID_KEY = "UID_KEY"
+
+fun startProfileActivity(context: Context, uid: String) {
+    with(context) {
+        val intent = Intent(context, ProfileActivity::class.java).apply {
+            putExtra(UID_KEY, uid)
+        }
+        startActivity(intent)
+    }
+}
+
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
@@ -34,22 +47,12 @@ class ProfileActivity : AppCompatActivity() {
 
         binding = ActivityProfileBinding.inflate(layoutInflater).apply { setContentView(root) }
         auth = Firebase.auth
+
         with(binding) {
 
-            btnTempPull.setOnClickListener {
-                loadData(binding)
-            }
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-
-        val currentUser = auth.currentUser
-        Log.i("currentUser", currentUser.toString())
-        // pull data based on auth.currentUser
-        // loadData(binding, auth.currentUser) or smth
-    }
 
     // TODO: Copy this function so that it gets called when profile is tapped from the tab bar
     private fun loadData(binding: ActivityProfileBinding) {

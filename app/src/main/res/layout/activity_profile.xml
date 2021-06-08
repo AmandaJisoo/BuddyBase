@@ -279,23 +279,25 @@
         android:inputType="text"
         />
 
-    <Button
-        android:id="@+id/btnTempPull"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        app:backgroundTint="@color/blue_buddybase"
+        android:id="@+id/fabLikeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvAttitude"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/fabDislikeBtn"
         app:layout_constraintRight_toRightOf="parent"
-        android:text="temp pull"
+        android:src="@drawable/ic_thumb"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabEditProfile"
+        android:id="@+id/fabDislikeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:src="@drawable/ic_baseline_edit_24"
         />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
