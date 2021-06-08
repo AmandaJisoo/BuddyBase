@@ -101,9 +101,9 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 Log.i("Whatisgoingon5", "${matchedFriends[position]}")
 //                onLikeClickListener(friendManager.recommendedFriends[position])
 
+                Log.i("godsuya2", "${matchedFriends[position].uid}")
 
-
-                val topic = "/topics/weather" //topic has to match what the receiver subscribed to
+                val topic = "/topics/${matchedFriends[position].uid}" //topic has to match what the receiver subscribed to
 
                 val notification = JSONObject()
                 val notifcationBody = JSONObject()
