@@ -173,7 +173,11 @@ class LogInActivity : AppCompatActivity() {
                                     .addOnSuccessListener { document ->
                                         if (document.data != null && document.data!!["Matched"] != null) {
                                             manager.setMatchedUids(document.data!!["Matched"] as List<String>)
-
+                                            user?.let {
+                                                manager.setEmail(user.email.toString())
+                                                manager.setFullName(user.displayName.toString())
+                                                manager.setUid(user.uid)
+                                            }
                                             val docRef1 = db.collection("Users")
                                             val matchedMap = mutableMapOf<String, Any>()
                                             docRef1.get()

@@ -14,7 +14,8 @@ data class UserInfo (
     var Q_Personality: List<String>,
     val Q_Pet: String,
     val Q_Show: String,
-    val Q_Taste: String
+    val Q_Taste: String,
+    val uid: String,
 )
 
 //Raiki Lim={

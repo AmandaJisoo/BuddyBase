@@ -70,6 +70,10 @@ dependencies {
 
     implementation 'com.facebook.android:facebook-login:4.30.0'
     implementation 'com.google.firebase:firebase-firestore-ktx:21.4.3'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+
+    implementation 'android.arch.work:work-runtime:1.0.1'
+    implementation 'com.android.volley:volley:1.1.1'
 
     //card view
     implementation "androidx.cardview:cardview:1.0.0"

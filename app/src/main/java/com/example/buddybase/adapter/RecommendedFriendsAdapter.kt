@@ -1,15 +1,26 @@
 package com.example.buddybase.adapter
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import coil.transform.CircleCropTransformation
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.example.buddybase.FriendDiffCallback
 import com.example.buddybase.R
+import com.example.buddybase.TestActivity
 import com.example.buddybase.UserApplication
 import com.example.buddybase.databinding.ItemRecommendedFriendBinding
 import com.example.buddybase.manager.FriendManager
@@ -17,10 +28,14 @@ import com.example.buddybase.manager.UserManager
 import com.example.buddybase.model.UserInfo
 import com.google.firebase.storage.StorageReference
 import io.github.rosariopfernandes.firecoil.load
+import org.json.JSONException
+import org.json.JSONObject
 
 class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo>,
                                 private val storageRef: StorageReference?,
-                                private val application: UserApplication):
+                                private val application: UserApplication,
+                                private val applicationContext: Context
+):
         RecyclerView.Adapter<RecommendedFriendsAdapter.FriendsViewHolder>() {
 
 //    private lateinit var manager: UserManager
@@ -31,6 +46,12 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
 
     var onLikeClickListener: (person: UserInfo) -> Unit = {_ ->}
     var onRemoveClickListener: (person: UserInfo) -> Unit = {_ ->}
+
+    private val FCM_API = "https://fcm.googleapis.com/fcm/send"
+    // I know.. it'll be okay as long as you don't tell the bad guys :)
+    private val serverKey = "key=" + "AAAAqr-v7PI:APA91bHahHey6HoHc6XYQtj9gjxw7TiY3Xebiw78YHNeJxWAAr1ra6YafSJGAyMwKsQZ-9Up6rDzm7JXxeykdFEA6NV7vibc7QCWJJx5A-lfAW0NgnhIiUkhHW0MreZviu1QYl8wsRjd"
+    private val contentType = "application/json"
+    private val requestQueue: RequestQueue by lazy { Volley.newRequestQueue(applicationContext) }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendsViewHolder {
         val binding = ItemRecommendedFriendBinding.inflate(LayoutInflater.from(parent.context))
@@ -78,13 +99,56 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
             btnLike.setOnClickListener{
                 Log.i("Whatisgoingon4", "${position}")
                 Log.i("Whatisgoingon5", "${matchedFriends[position]}")
-                onLikeClickListener(friendManager.recommendedFriends[position])
+//                onLikeClickListener(friendManager.recommendedFriends[position])
+
+
+
+                val topic = "/topics/weather" //topic has to match what the receiver subscribed to
+
+                val notification = JSONObject()
+                val notifcationBody = JSONObject()
+
+                try {
+                    notifcationBody.put("title", "Firebase Notification")
+                    notifcationBody.put("message", "yoyoyo")
+                    notification.put("to", topic)
+                    notification.put("data", notifcationBody)
+                    Log.e("TAG", "try")
+                } catch (e: JSONException) {
+                    Log.e("TAG", "onCreate: " + e.message)
+                }
+
+                sendNotification(notification)
+
+
+
             }
 
             btnRemove.setOnClickListener {
+                Log.i("yuh", "removing from list")
                 onRemoveClickListener(friendManager.recommendedFriends[position])
             }
         }
+    }
+
+    private fun sendNotification(notification: JSONObject) {
+        Log.e("TAG", "sendNotification")
+        val jsonObjectRequest = object : JsonObjectRequest(FCM_API, notification,
+            Response.Listener { response ->
+                Log.i("TAG", "onResponse: $response")
+            },
+            Response.ErrorListener {
+                Log.i("godsuya", "onErrorResponse: Didn't work")
+            }) {
+
+            override fun getHeaders(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params["Authorization"] = serverKey
+                params["Content-Type"] = contentType
+                return params
+            }
+        }
+        requestQueue.add(jsonObjectRequest)
     }
 
 //    fun loadProfilePic() {

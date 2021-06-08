@@ -70,7 +70,7 @@ class RecommendedFriendsFragment : Fragment() {
 //        matchedFriends = friendManager.recommendedFriends
 
         friendManager.loadRecommendedFriends(matchedFriends)
-        val adapter = RecommendedFriendsAdapter(friendManager.recommendedFriends, manager.firebaseStorageReference, userApp)
+        val adapter = RecommendedFriendsAdapter(friendManager.recommendedFriends, manager.firebaseStorageReference, userApp, userApp.applicationContext)
         adapter.onLikeClickListener = { friend ->
             Log.i("WhatisgoingonFrag1", "${friend}")
             Log.i("WhatisgoingonFrag2", "${matchedFriends.indexOf(friend)}")

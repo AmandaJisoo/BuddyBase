@@ -94,6 +94,7 @@ class SignUpQuestionsActivity : AppCompatActivity() {
                                 }
                             }
                             userDetails["Matched"] = matchedList
+                            userDetails["uid"] = manager.uid.toString()
                             manager.setMatchedUids(matchedList)
                             manager.setMatchedUsers(matchedMap)
                             val docRef = manager.uid?.let { it1 -> firestore.collection("Users").document(it1) }

@@ -18,10 +18,7 @@ class NotificationsFragment : Fragment() {
     lateinit var userApp: UserApplication
     lateinit var manager: NotificationManager
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentNotificationsBinding.inflate(inflater)
         activity?.title = "Notifications"
         with(binding) {
@@ -33,4 +30,5 @@ class NotificationsFragment : Fragment() {
         }
         return binding.root
     }
+
 }
