@@ -47,6 +47,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
 
     var onLikeClickListener: (person: UserInfo) -> Unit = {_ ->}
     var onRemoveClickListener: (person: UserInfo) -> Unit = {_ ->}
+    var onFriendClickListener: (person: UserInfo) -> Unit = {_ ->}
 
     private val FCM_API = "https://fcm.googleapis.com/fcm/send"
     // I know.. it'll be okay as long as you don't tell the bad guys :)
@@ -63,7 +64,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
         friend = matchedFriends[position]
         with(holder.binding) {
             tvFriendName.text = friend.FullName
-            val friendType = friend.Q_FriendType.joinToString { it }
+            val friendType = friend.Q_FriendType?.joinToString { it }
             tvFriendPersonality.text = root.context.getString(
                 R.string.recommended_friends_friend_type_format,
                 friendType
@@ -127,6 +128,10 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 Log.i("yuh", "removing from list")
                 onRemoveClickListener(friendManager.recommendedFriends[position])
             }
+
+            itemRoot.setOnClickListener {
+                onFriendClickListener(friend)
+            }
         }
     }
 
@@ -146,6 +151,8 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
                 params["Content-Type"] = contentType
                 return params
             }
+
+
         }
         requestQueue.add(jsonObjectRequest)
     }

@@ -27,6 +27,9 @@ class LikedFriendsAdapter(private val likedFriends: List<UserInfo>,
 
     var onRemoveClickListener: (person: UserInfo) -> Unit = {_ ->}
 
+
+    var onFriendClickListener: (person: UserInfo) -> Unit = {_ ->}
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikedFriendViewHolder {
         val binding = ItemLikedFriendBinding.inflate(LayoutInflater.from(parent.context))
         return LikedFriendViewHolder(binding)
@@ -62,8 +65,13 @@ class LikedFriendsAdapter(private val likedFriends: List<UserInfo>,
             btnRemove.setOnClickListener {
                 onRemoveClickListener(friendManager.likedFriends[position])
             }
+            itemLikedRoot.setOnClickListener {
+                onFriendClickListener(friend)
+            }
         }
     }
+
+
 
     override fun getItemCount(): Int = likedFriends.size
 
