@@ -31,6 +31,7 @@ class FriendManager {
         while (itr.hasNext()) {
             val matchedFriend = itr.next()
             if(matchedFriend.uid == userManager.uid) {
+                matchedFriend.FullName?.let { userManager.setFullName(it) }
                 recommendedFriends.remove(matchedFriend)
             }
         }

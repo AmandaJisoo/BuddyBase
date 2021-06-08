@@ -39,7 +39,7 @@
     <string name="remove">Remove</string>
     <string name="submit">submit</string>
     <string name="you_are_all_set_msg">you are all set msg</string>
-    <string name="recommended_friends_friend_type_format">"%s is looking for %s friends."</string>
+    <string name="recommended_friends_friend_type_format">"is looking for %s friends."</string>
     <string name="sign_in">Log In</string>
     <string name="tvLoginInstead">Already have an account?</string>
     <string name="tvSignUpInstead">Don\'t have an account?</string>

@@ -1,25 +1,25 @@
 package com.example.buddybase
 
+import android.R
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentTransaction
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.example.buddybase.fragment.NotificationsFragment
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import java.util.*
+
 
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
@@ -122,20 +122,33 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
      * @param messageBody FCM message body received.
      */
     private fun sendNotification(messageBody: String) {
-        val bundle = Bundle()
         val intent = Intent(this, NotificationsFragment::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            bundle.putString("NOTIFICATION", messageBody)
-            putExtras(bundle)
+            putExtra("NOTIFICATION", messageBody)
         }
         val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT)
+                PendingIntent.FLAG_UPDATE_CURRENT)
 
+
+        val args = Bundle()
+        args.putParcelable("my_custom_object", myObject)
+        val fragment = NotificationsFragment()
+        fragment.setArguments(args)
+        val transaction: FragmentTransaction = activity.getSupportFragmentManager().beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
+
+//        val kotlinFragment = KotlinFragment.newInstance("Hello", 111, testData)
+//
+//        supportFragmentManager
+//                .beginTransaction()
+//                .replace(R.id.content, kotlinFragment, fragment.KotlinFragment.javaClass.name)
+//                .commit()
 
 
         val largeIcon = BitmapFactory.decodeResource(
-            resources,
-            R.drawable.ic_buddybase
+                resources,
+                R.drawable.ic_buddybase
         )
 
         val channelId = getString(R.string.default_notification_channel_id)
@@ -154,8 +167,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         // Since android Oreo notification channel is needed.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(channelId,
-                "Channel human readable title",
-                NotificationManager.IMPORTANCE_DEFAULT)
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT)
             channel.enableLights(true)
             channel.enableVibration(true)
             notificationManager.createNotificationChannel(channel)

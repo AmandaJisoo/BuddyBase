@@ -17,7 +17,8 @@ data class UserInfo(
     var Q_Personality: List<String>?,
     val Q_Pet: String?,
     val Q_Show: String?,
-    val Q_Taste: String?
+    val Q_Taste: String?,
+    val uid: String?
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
@@ -27,6 +28,7 @@ data class UserInfo(
         parcel.createStringArrayList(),
         parcel.createStringArrayList(),
         parcel.createStringArrayList(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
@@ -44,6 +46,7 @@ data class UserInfo(
         parcel.writeString(Q_Pet)
         parcel.writeString(Q_Show)
         parcel.writeString(Q_Taste)
+        parcel.writeString(uid)
     }
 
     override fun describeContents(): Int {
