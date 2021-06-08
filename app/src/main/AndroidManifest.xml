@@ -21,6 +21,7 @@
 <!--             </intent-filter>-->
 
         </activity>
+        <activity android:name=".ProfileActivity"/>
 <!--        <activity android:name=".RecommendedFriendsActivity"-->
 <!--            android:label="Recommended Friends">-->
 <!--        <activity android:name=".LikedFriendsActivity" />-->

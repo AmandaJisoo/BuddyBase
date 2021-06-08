@@ -2,22 +2,21 @@ package com.example.buddybase
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import coil.load
 import com.example.buddybase.databinding.ActivityProfileBinding
+import com.example.buddybase.fragment.RecommendedFriendsFragment
+import com.example.buddybase.manager.UserManager
+import com.example.buddybase.model.UserInfo
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
+import io.github.rosariopfernandes.firecoil.load
 import kotlinx.coroutines.launch
-import java.io.File
-import java.io.IOException
 
 // ID for "Bill Gates"
 //private const val TEST_DATA = "5uuWVzvVphYMEX8XMy5d"
@@ -25,10 +24,10 @@ import java.io.IOException
 
 private const val UID_KEY = "UID_KEY"
 
-fun startProfileActivity(context: Context, uid: String) {
+fun startProfileActivity(context: Context, friend: UserInfo) {
     with(context) {
         val intent = Intent(context, ProfileActivity::class.java).apply {
-            putExtra(UID_KEY, uid)
+            putExtra(UID_KEY, friend)
         }
         startActivity(intent)
     }
@@ -37,17 +36,23 @@ fun startProfileActivity(context: Context, uid: String) {
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
-    private lateinit var personDataTemp: Map<String, Any>
-    private lateinit var failMsg: String
-    private lateinit var profPicBitmap: Bitmap
+    lateinit var manager: UserManager
+    lateinit var userApp: UserApplication
     private lateinit var auth: FirebaseAuth
+    private lateinit var friend: UserInfo
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityProfileBinding.inflate(layoutInflater).apply { setContentView(root) }
         auth = Firebase.auth
+        userApp = this.applicationContext as UserApplication
+        this.manager = userApp.userManager
 
+        friend = intent.extras?.getParcelable<UserInfo>(UID_KEY)!!
+
+        loadData(binding, friend)
         with(binding) {
 
         }
@@ -55,53 +60,26 @@ class ProfileActivity : AppCompatActivity() {
 
 
     // TODO: Copy this function so that it gets called when profile is tapped from the tab bar
-    private fun loadData(binding: ActivityProfileBinding) {
-        lifecycleScope.launch {
-            runCatching {
-                val firestore = FirebaseFirestore.getInstance()
-                val docRef = firestore.collection("Users").document("5uuWVzvVphYMEX8XMy5d")
-                docRef.get()
-                    .addOnSuccessListener { document ->
-                        if (document != null) {
-                            personDataTemp = document.data as Map<String, Any>
-
-
-//                          Gets image based on document id from firebase storage
-                            var storage: FirebaseStorage = FirebaseStorage.getInstance()
-                            var storageReference = storage.getReferenceFromUrl("gs://buddybase-efd0e.appspot.com/user_profile_pics").child("${document.id}.jpg")
-                            try {
-                                var localFile: File = File.createTempFile("images", "jpg")
-                                storageReference.getFile(localFile)
-                                    .addOnSuccessListener {
-                                        profPicBitmap = BitmapFactory.decodeFile(localFile.absolutePath)
-                                    }
-                                    .addOnFailureListener {
-
-                                    }
-                                localFile.deleteOnExit()
-                            } catch (e: IOException) {}
-
-
-                            with(binding) {
-                                ivVariableProfPic.load(profPicBitmap)
-                                tvName.text = "${personDataTemp["FullName"]}"
-                                tvVariableAnimal.text = "${personDataTemp["Q_Pet"]}"
-                                tvVariableMusic.text = "${personDataTemp["Q_Music"].toString().drop(1).dropLast(1)}"
-                                tvVariableShow.text = "Would watch ${personDataTemp["Q_Show"]}"
-                                tvPersonalityType.text = "${personDataTemp["Q_Personality"].toString().drop(1).dropLast(1)}"
-                                tvVariableFood.text = "${personDataTemp["Q_Taste"]}"
-                                tvVariableAttitude.text = "${personDataTemp["Q_FriendType"].toString().drop(1).dropLast(1)}"
-                            }
-                        } else {
-                            failMsg = "Doc doesn't exist"
-                        }
+    private fun loadData(binding: ActivityProfileBinding, friend: UserInfo) {
+        val storageReference = manager.firebaseStorageReference
+            with(binding) {
+                friend.ImageProfilePic?.let { Log.i("imagePath", it) }
+                if (storageReference != null) {
+                    val profPic = friend.ImageProfilePic
+                    if (profPic != null) {
+                        val img = storageReference.child(profPic)
+                        ivVariableProfPic.load(img)
                     }
-                    .addOnFailureListener{ exception ->
-                        Log.d("uhOh", "get failed with", exception)
-                    }
-            }.onFailure {
-                failMsg = "Failed"
+                }
+                tvName.text = friend.FullName
+                tvVariableAnimal.text = friend.Q_Pet
+                tvVariableMusic.text = friend.Q_Music.toString().drop(1).dropLast(1)
+                tvVariableShow.text = "Would watch ${friend.Q_Show}"
+                tvPersonalityType.text = friend.Q_Personality.toString().drop(1).dropLast(1)
+                tvVariableFood.text = friend.Q_Taste
+                tvVariableAttitude.text = friend.Q_FriendType.toString().drop(1).dropLast(1)
             }
-        }
+
+
     }
 }

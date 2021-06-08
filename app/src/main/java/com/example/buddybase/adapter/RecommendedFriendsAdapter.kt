@@ -23,6 +23,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
     // new
     var onLikeClickListener: (person: UserInfo) -> Unit = {_ ->}
     var onRemoveClickListener: (person: UserInfo) -> Unit = {_ ->}
+    var onFriendClickListener: (person: UserInfo) -> Unit = {_ ->}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendsViewHolder {
         val binding = ItemRecommendedFriendBinding.inflate(LayoutInflater.from(parent.context))
@@ -45,7 +46,7 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
         val friend = matchedFriends[position]
         with(holder.binding) {
             tvFriendName.text = friend.FullName
-            val friendType = friend.Q_FriendType.joinToString { it }
+            val friendType = friend.Q_FriendType?.joinToString { it }
             tvFriendPersonality.text = root.context.getString(
                 R.string.recommended_friends_friend_type_format,
                 friend.FullName,
@@ -82,6 +83,10 @@ class RecommendedFriendsAdapter(private var matchedFriends: MutableList<UserInfo
             btnRemove.setOnClickListener {
                 onRemoveClickListener(friend)
                 notifyDataSetChanged()
+            }
+
+            itemRoot.setOnClickListener {
+                onFriendClickListener(friend)
             }
         }
     }

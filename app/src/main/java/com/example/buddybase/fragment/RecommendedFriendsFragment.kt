@@ -1,17 +1,23 @@
 package com.example.buddybase.fragment
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.buddybase.HomeActivity
+import com.example.buddybase.ProfileActivity
 import com.example.buddybase.UserApplication
 import com.example.buddybase.adapter.RecommendedFriendsAdapter
 import com.example.buddybase.databinding.FragmentRecommendedFriendsBinding
 import com.example.buddybase.manager.FriendManager
 import com.example.buddybase.manager.UserManager
 import com.example.buddybase.model.UserInfo
+import com.example.buddybase.startProfileActivity
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
@@ -38,6 +44,7 @@ class RecommendedFriendsFragment : Fragment() {
 
         loadRecommendedFriends(binding)
         with(binding) {
+
             // swipe to refresh
             srlRefreshFriendList.setOnRefreshListener {
 
@@ -83,6 +90,17 @@ class RecommendedFriendsFragment : Fragment() {
         }
         adapter.onRemoveClickListener = { friend ->
             friendManager.onRecommendRemoveClick(friend)
+        }
+
+        //val intentProfileActivity = Intent(activity, ProfileActivity::class.java)
+
+        adapter.onFriendClickListener = { friend ->
+            if (this.isAdded) {
+                startProfileActivity(activity as Context, friend)
+            } else {
+                Toast.makeText(activity as Context, "Please try again", Toast.LENGTH_SHORT).show()
+            }
+
         }
 //        adapter.
 //        manager.firebaseStorageReference
